@@ -216,11 +216,11 @@
   // page ne redirige pas ici et se contente d'afficher un bouton.
   if (webviewSocial) {
 
-    // Mesuré sur iPhone dans Instagram : toutes les sorties directes depuis
-    // notre domaine sont refusées (schéma direct, bascule JS), mais le même
-    // circuit via onelink.to — domaine intermédiaire connu de Meta — aboutit
-    // (vérifié avec le lien de Jewbuzz). Le bouton passe donc par onelink.
-    if (estIOS) { lien.href = "https://onelink.to/ywdcqg"; }
+    // Mesuré sur iPhone (août 2026) : le webview Instagram bloque TOUTES les
+    // sorties vers l'App Store — lien direct, schéma itms-appss, bascule JS,
+    // et même le relais onelink.to (sa page de secours boucle sur le repli).
+    // Le bouton garde donc le lien App Store officiel ; si rien ne s'ouvre,
+    // les solutions de secours apparaissent après 1,6 s.
 
     lien.addEventListener("click", function () {
       // Si l'écran est toujours au premier plan 1,6 s après l'appui,
