@@ -168,6 +168,7 @@
   lien.href = URL_APP;
   document.getElementById("lienItms").href = URL_ITMS;
 
+  // Icône : marquée seulement si le PNG se charge, sinon le monogramme reste.
   var icone = document.getElementById("icone");
   var porte = document.getElementById("porteIcone");
   function afficheIcone(){ porte.classList.add("avec-image"); }
@@ -180,6 +181,7 @@
   var estIOS = /iPhone|iPad|iPod/i.test(ua) ||
                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
+  // Copie du lien : tout dernier recours.
   copier.addEventListener("click", function () {
     var texte = document.getElementById("copierTexte");
     function confirme(){
@@ -210,7 +212,10 @@
   // Seul un vrai appui sur une balise <a> fonctionne. C'est pourquoi cette
   // page ne redirige pas ici et se contente d'afficher un bouton.
   if (webviewSocial) {
+
     lien.addEventListener("click", function () {
+      // Si l'écran est toujours au premier plan 1,6 s après l'appui,
+      // c'est que rien ne s'est ouvert : on propose les solutions de repli.
       setTimeout(function () {
         if (!document.hidden) {
           repliZone.classList.add("visible");
@@ -223,171 +228,12 @@
     return;
   }
 
+  // Safari / Chrome sur iPhone, hors navigateur intégré : ouverture directe.
   if (estIOS) {
     setTimeout(function () { window.location.replace(URL_APP); }, 400);
   }
 })();
 </script>
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Moadim — Télécharger l'application</title>
-<meta name="description" content="Moadim : fêtes juives, horaires et textes. Application iPhone gratuite.">
-
-<!-- Bandeau natif « Ouvrir dans l'App Store » sur Safari iOS -->
-<meta name="apple-itunes-app" content="app-id=6782411711">
-
-<!-- Aperçu du lien quand il est collé dans Instagram, WhatsApp, iMessage -->
-<meta property="og:title" content="Moadim — Fêtes juives, horaires et textes">
-<meta property="og:description" content="Télécharger gratuitement sur l'App Store.">
-<meta property="og:image" content="preview.jpg">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="icon.png">
-
-<style>
-  :root{
-    --or:#c9a227;
-    --or-clair:#e6cd76;
-    --nuit:#0e1526;
-    --nuit-2:#1c2744;
-    --texte:#f5f2e9;
-    --gris:#a6aec2;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
-    background:radial-gradient(125% 90% at 50% -10%,var(--nuit-2) 0%,var(--nuit) 55%,#070c17 100%);
-    color:var(--texte);
-    min-height:100dvh;
-    display:flex;align-items:center;justify-content:center;
-    padding:28px 24px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .carte{
-    width:100%;max-width:400px;text-align:center;
-    animation:apparait .65s cubic-bezier(.16,1,.3,1) both;
-  }
-  @keyframes apparait{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-
-  /* --- Icône : image réelle si icon.png existe, sinon monogramme doré --- */
-  .porte-icone{
-    width:110px;height:110px;margin:0 auto 24px;position:relative;
-    border-radius:25px;overflow:hidden;
-    background:linear-gradient(160deg,#33406a 0%,#1d2743 100%);
-    box-shadow:0 20px 44px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.09);
-  }
-  .porte-icone img{width:100%;height:100%;object-fit:cover;display:block}
-  .porte-icone .repli{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-size:46px;color:var(--or-clair);
-  }
-  .porte-icone.avec-image .repli{display:none}
-
-  h1{font-size:31px;font-weight:700;letter-spacing:-.022em;margin-bottom:9px}
-  .sous{color:var(--gris);font-size:16px;line-height:1.55;margin-bottom:32px}
-
-  .bouton{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    width:100%;padding:17px 20px;
-    background:linear-gradient(180deg,var(--or-clair),var(--or));
-    color:#1a1405;font-size:17px;font-weight:650;
-    border:none;border-radius:15px;text-decoration:none;
-    box-shadow:0 12px 28px rgba(201,162,39,.3);
-    transition:transform .16s ease,box-shadow .16s ease;
-  }
-  .bouton:active{transform:scale(.972);box-shadow:0 6px 16px rgba(201,162,39,.26)}
-  .bouton svg{width:20px;height:20px;fill:currentColor;flex:none}
-
-  .avis{
-    display:none;margin-top:24px;padding:16px 18px;
-    background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);
-    border-radius:14px;font-size:14.5px;line-height:1.6;color:var(--gris);text-align:left;
-  }
-  .avis.visible{display:block;animation:apparait .5s .15s both}
-  .avis b{color:var(--texte);font-weight:600}
-  .points{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:24px;height:24px;border-radius:50%;
-    background:rgba(255,255,255,.17);color:var(--texte);
-    font-weight:700;line-height:1;vertical-align:-6px;letter-spacing:1.5px;font-size:11px;
-  }
-  .pied{margin-top:30px;font-size:12.5px;color:#6d7893;line-height:1.6}
-  .pied a{color:#8e9ab5;text-decoration:none;border-bottom:1px solid rgba(142,154,181,.35)}
-</style>
-</head>
-<body>
-<div class="carte">
-
-  <div class="porte-icone" id="porteIcone">
-    <img src="icon.png" alt="Icône de l'application Moadim" id="icone">
-    <div class="repli">✡</div>
-  </div>
-
-  <h1>Moadim</h1>
-  <p class="sous">Fêtes juives, horaires et textes.<br>Gratuit sur l'App Store.</p>
-
-  <a class="bouton" id="lien" href="https://apps.apple.com/app/id6782411711" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.54c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.62-1.7-3.19-1.72-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.87-.76-1.48.02-2.84.86-3.6 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.2 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.08 2.65-2.14.84-1.23 1.18-2.42 1.2-2.48-.03-.01-2.3-.88-2.32-3.5zM14.9 5.6c.6-.74 1.01-1.76.9-2.78-.87.04-1.93.58-2.56 1.31-.56.65-1.05 1.69-.92 2.68.97.08 1.97-.49 2.58-1.21z"/></svg>
-    Ouvrir dans l'App Store
-  </a>
-
-  <div class="avis" id="avis">
-    <b>Le navigateur d'Instagram bloque l'App Store.</b><br>
-    Touchez <span class="points">•••</span> en haut à droite, puis
-    <b>« Ouvrir dans le navigateur »</b> (ou <b>« Ouvrir dans Safari »</b>).
-    Le téléchargement démarrera normalement.
-  </div>
-
-  <p class="pied">
-    Développée par Gerald Benhaim<br>
-    <a href="https://apps.apple.com/app/id6782411711">apps.apple.com/app/id6782411711</a>
-  </p>
-</div>
-
-<script>
-(function () {
-  "use strict";
-
-  // Identifiant Apple de Moadim. URL sans code pays : l'App Store
-  // redirige automatiquement vers la boutique du visiteur.
-  var URL_APP = "https://apps.apple.com/app/id6782411711";
-  document.getElementById("lien").href = URL_APP;
-
-  // Icône : on marque le conteneur seulement si le PNG se charge,
-  // sinon le monogramme doré reste affiché (pas d'image cassée).
-  var icone = document.getElementById("icone");
-  var porte = document.getElementById("porteIcone");
-  function afficheIcone(){ porte.classList.add("avec-image"); }
-  if (icone.complete && icone.naturalWidth > 0) { afficheIcone(); }
-  else { icone.addEventListener("load", afficheIcone); }
-  icone.addEventListener("error", function(){ icone.style.display = "none"; });
-
-  var ua = navigator.userAgent || "";
-  var webviewSocial = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|Threads|Line\/|MicroMessenger/i.test(ua);
-  var estIOS = /iPhone|iPad|iPod/i.test(ua) ||
-               (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-  // Navigateur intégré d'Instagram : pas de redirection automatique.
-  // Le webview refuse d'ouvrir l'App Store natif, on afficherait une page blanche.
-  // On explique la sortie vers Safari à la place.
-  if (webviewSocial) {
-    document.getElementById("avis").classList.add("visible");
-    return;
-  }
-
-  // Safari / Chrome sur iPhone : ouverture directe de la fiche.
-  if (estIOS) {
-    setTimeout(function () { window.location.replace(URL_APP); }, 500);
-  }
-})();
-</script>
 </body>
 </html>
