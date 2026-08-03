@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ouverture de l'App Store…</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--or:#c9a227;--or-clair:#e6cd76;--nuit:#0e1526;--texte:#f5f2e9;--gris:#a6aec2}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(125% 90% at 50% -10%,#1c2744 0%,var(--nuit) 55%,#070c17 100%);
+    color:var(--texte);min-height:100dvh;
+    display:flex;align-items:center;justify-content:center;
+    padding:28px 24px;text-align:center;-webkit-font-smoothing:antialiased;
+  }
+  .rond{
+    width:44px;height:44px;margin:0 auto 20px;border-radius:50%;
+    border:3px solid rgba(230,205,118,.25);border-top-color:var(--or-clair);
+    animation:tourne .8s linear infinite;
+  }
+  @keyframes tourne{to{transform:rotate(360deg)}}
+  p{color:var(--gris);font-size:16px}
+  .secours{display:none;max-width:400px;width:100%}
+  .secours.visible{display:block}
+  .secours h2{font-size:20px;margin-bottom:18px}
+  .b{
+    display:flex;align-items:center;justify-content:center;width:100%;
+    margin-top:10px;padding:16px 20px;border-radius:14px;text-decoration:none;
+    font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .b-or{background:linear-gradient(180deg,var(--or-clair),var(--or));color:#1a1405;border:none}
+  .b-gris{background:rgba(255,255,255,.07);color:var(--texte);border:1px solid rgba(255,255,255,.14)}
+  .note{margin-top:20px;font-size:14px;line-height:1.6;color:var(--gris);text-align:left;
+    background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;padding:14px 16px}
+  .note b{color:var(--texte)}
+  .points{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+    border-radius:50%;background:rgba(255,255,255,.17);font-weight:700;font-size:10px;
+    letter-spacing:1.5px;vertical-align:-5px}
+</style>
+</head>
+<body>
+
+<div id="attente">
+  <div class="rond"></div>
+  <p>Ouverture de l'App&nbsp;Store…</p>
+</div>
+
+<div class="secours" id="secours">
+  <h2>L'App Store ne s'est pas ouvert</h2>
+  <a class="b b-or" href="itms-appss://apps.apple.com/fr/app/moadim/id6782411711">Réessayer</a>
+  <a class="b b-gris" href="x-safari-https://apps.apple.com/fr/app/moadim/id6782411711">Ouvrir dans Safari</a>
+  <div class="note">
+    Ou touchez <span class="points">•••</span> en haut à droite puis
+    <b>« Ouvrir dans le navigateur »</b> — le téléchargement démarrera normalement.
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // Réplique du mécanisme observé chez onelink.to : la navigation vers cette
+  // page part d'un appui réel sur le bouton de la page d'accueil, et la
+  // bascule immédiate vers le schéma App Store est traitée par le webview
+  // comme la suite de ce geste.
+  var ITMS = "itms-appss://apps.apple.com/fr/app/moadim/id6782411711";
+  location.replace(ITMS);
+  // Si on est toujours visible après 1,8 s, la bascule a été refusée :
+  // on remplace le sablier par les solutions de secours.
+  setTimeout(function () {
+    if (!document.hidden) {
+      document.getElementById("attente").style.display = "none";
+      document.getElementById("secours").classList.add("visible");
+    }
+  }, 1800);
+})();
+</script>
+
+</body>
+</html>

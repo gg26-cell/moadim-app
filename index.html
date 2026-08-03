@@ -216,6 +216,11 @@
   // page ne redirige pas ici et se contente d'afficher un bouton.
   if (webviewSocial) {
 
+    // Mécanisme observé chez onelink.to (Jewbuzz) : l'appui charge une page
+    // intermédiaire qui bascule aussitôt vers le schéma App Store. Le webview
+    // accepte cette bascule car elle prolonge le geste de l'utilisateur.
+    if (estIOS) { lien.href = "ios.html"; }
+
     lien.addEventListener("click", function () {
       // Si l'écran est toujours au premier plan 1,6 s après l'appui,
       // c'est que rien ne s'est ouvert : on propose les solutions de repli.
