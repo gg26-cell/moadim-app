@@ -216,10 +216,11 @@
   // page ne redirige pas ici et se contente d'afficher un bouton.
   if (webviewSocial) {
 
-    // Mécanisme observé chez onelink.to (Jewbuzz) : l'appui charge une page
-    // intermédiaire qui bascule aussitôt vers le schéma App Store. Le webview
-    // accepte cette bascule car elle prolonge le geste de l'utilisateur.
-    if (estIOS) { lien.href = "ios.html"; }
+    // Mesuré sur iPhone dans Instagram : une bascule JavaScript vers le
+    // schéma App Store est refusée (page ios.html), mais un appui direct
+    // sur un lien portant ce schéma est accepté. Donc dans le webview,
+    // le bouton principal porte directement le schéma.
+    if (estIOS) { lien.href = URL_ITMS; }
 
     lien.addEventListener("click", function () {
       // Si l'écran est toujours au premier plan 1,6 s après l'appui,
