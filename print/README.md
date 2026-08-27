@@ -1,8 +1,12 @@
 # La feuille de miel — Roch Hachana 5787
 
-Feuille A4 recto-verso à poser sur la table de Roch Hachana : le seder des signes
-(usage tunisien) au recto, les gestes qui l'entourent au verso. Logo Moadim en
-couleur, QR vers la fiche App Store.
+Feuille à poser sur la table de Roch Hachana. Deux versions :
+
+- **complète**, 4 pages — les signes, le Kiddouch du premier soir, le Kiddouch du
+  second soir, les gestes autour de la table ;
+- **courte**, 2 pages recto-verso — les signes et les gestes, sans le Kiddouch.
+
+Logo Moadim en couleur, QR vers la fiche App Store.
 
 ## Fichiers
 
@@ -15,8 +19,10 @@ couleur, QR vers la fiche App Store.
 | `build.py` | injecte polices, logo et QR ; écrit les HTML de `dist/` |
 | `topdf.mjs` | rend les HTML en PDF, chacun à son format de page |
 | `quadri.py` | passe le PDF quadri en CMJN et pose TrimBox / BleedBox |
-| `dist/…-bureau-A4.pdf` | A4 nu, RVB — pour l'imprimante de bureau |
-| `dist/…-quadri-BAT.pdf` | **le bon à tirer** — CMJN, fond perdu, traits de coupe |
+| `dist/…-complete-A4.pdf` | 4 pages A4 nues, RVB — imprimante de bureau |
+| `dist/…-complete-quadri-BAT.pdf` | **le bon à tirer complet** — CMJN, fond perdu, traits de coupe |
+| `dist/…-courte-A4.pdf` | la version 2 pages, même traitement |
+| `dist/…-courte-quadri-BAT.pdf` | son bon à tirer |
 
 ## Refabriquer
 
@@ -39,7 +45,9 @@ python3 print/quadri.py
 - **Fond perdu** : l'aplat crème déborde de 3 mm au-delà du trait de coupe.
 - **Polices** incorporées et sous-ensemblées. **Images** : logo 720 × 720 px posé à
   21 mm, soit ~870 dpi.
-- **Impression recto-verso**, reliure bord long.
+- **Imposition** : les pages sont livrées **dans l'ordre de lecture**, une par page.
+  L'imprimeur impose lui-même s'il tire la version complète en A3 plié. La version
+  courte s'imprime en recto-verso, reliure bord long.
 - **Papier conseillé** : 150 g mat ivoire pour une feuille, 250 g pour une carte de
   table qui tient debout.
 
@@ -47,6 +55,26 @@ python3 print/quadri.py
 
 A4 strict, sans fond perdu ni traits de coupe, marges 11 / 13 / 8 mm : elle sort telle
 quelle sur n'importe quelle imprimante. Penser à cocher « imprimer les arrière-plans ».
+
+## Le Kiddouch
+
+Le corps du texte vient du corpus de l'application (`mobile/src/content/seed.ts`,
+`prayer-kiddush-yom-tov` et `prayer-kiddush-chabbat`) : hébreu d'après Sefaria,
+translittération séfarade et traduction déjà relues. **Deux passages ont dû être
+écrits pour Roch Hachana**, que le corpus ne couvre pas encore — il s'arrête à
+Pessah, Chavouot, Souccot et Chemini Atseret :
+
+- le corps du jour : « et yom hazikaron hazé, yom (zikhron) teroua » ;
+- la conclusion : « mélekh al kol haarets, mekadech (haChabbat vé)Israël veyom
+  hazikaron ».
+
+Ce sont les deux endroits à faire valider en priorité. Les variantes sont
+**résolues** dans chaque page : le premier soir porte les inserts du Chabbat, le
+second soir les omet et ajoute la Havdala.
+
+Le Nom divin est composé **יְיָ** et non en toutes lettres : une feuille distribuée
+puis jetée ne doit pas imposer la guéniza. C'est une constante de `build.py` à un
+seul endroit si tu veux en changer.
 
 ## Contenu
 

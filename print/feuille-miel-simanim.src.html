@@ -142,6 +142,28 @@
   .liste li { position: relative; padding-left: 4mm; margin-bottom: 1.6mm; }
   .liste li::before { content: "·"; position: absolute; left: 1.2mm; color: var(--bronze); font-weight: 700; }
 
+  /* ---------- pages de prière ---------- */
+  .page-priere h1 { font-size: 20pt; }
+  .page-priere .tete { padding-bottom: 2.6mm; margin-bottom: 3mm; }
+  .priere { flex: 1 1 auto; display: flex; flex-direction: column; gap: 2.2mm; }
+  .mouvement { break-inside: avoid; }
+  .mouvement + .mouvement { border-top: 0.5pt solid rgba(166,134,63,.45); padding-top: 2.2mm; }
+  .mouvement .etiquette {
+    font-size: 7pt; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--bronze); font-weight: 700; margin-bottom: 1mm;
+  }
+  .mouvement .didascalie { font-size: 7.8pt; color: var(--encre2); font-style: italic; margin-bottom: 0.8mm; }
+  .priere .he { font-size: 11.5pt; line-height: 1.62; text-align: right; }
+  .priere .ph { font-size: 7.8pt; font-style: italic; color: var(--encre2); line-height: 1.38; margin-top: 1.4mm; }
+  .priere .fr { font-size: 8.6pt; line-height: 1.4; margin-top: 1.4mm; }
+  .encadre {
+    background: var(--parchemin); border: 0.8pt solid var(--filet); border-radius: 2mm;
+    padding: 3mm 3.6mm; break-inside: avoid;
+  }
+  .encadre .etiquette { color: var(--bronze); }
+  .encadre p { font-size: 8.6pt; line-height: 1.4; }
+  .encadre p + p { margin-top: 1.6mm; }
+
   /* ---------- pied ---------- */
   .pied {
     margin-top: 3mm; padding-top: 2.4mm; border-top: 1pt solid var(--filet);
@@ -299,10 +321,149 @@
       <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
     </div>
   </footer>
-  <div class="bat-marque"><span>BAT v1 — recto — 27.08.2026</span><span>Moadim · Roch Hachana 5787</span></div>
+  <div class="bat-marque"><span>BAT v2 — le seder des signes</span><span>Moadim · Roch Hachana 5787</span></div>
 </section>
 
-<!-- ================== VERSO ================== -->
+<!--KIDDOUCH-->
+<!-- ================== LE KIDDOUCH — PREMIER SOIR ================== -->
+<section class="feuille page-priere">
+  <div class="fond"></div>__MARQUES__
+  <header class="tete">
+    <div class="identite">
+      <div class="logo petit" role="img" aria-label="Moadim"></div>
+      <div class="titrage">
+        <div class="offre">La feuille de miel — le Kiddouch</div>
+        <h1>Le premier soir</h1>
+        <div class="rite">Vendredi 11 septembre 2026 — Chabbat et Yom Tov</div>
+      </div>
+      <div class="dates">
+        <b class="annee">Texte prêt à lire</b>
+        Les passages du Chabbat sont <b>déjà inclus</b> :<br>ce soir, on lit la page telle quelle.
+      </div>
+    </div>
+  </header>
+
+  <div class="priere">
+
+    <section class="mouvement">
+      <div class="etiquette">Vayekhoulou</div>
+      <div class="didascalie">On se lève. À voix basse : « Yom hachichi. »</div>
+      <div class="he">וַיְכֻלּוּ הַשָּׁמַיִם וְהָאָרֶץ וְכָל צְבָאָם׃ וַיְכַל אֱלֹהִים בַּיּוֹם הַשְּׁבִיעִי מְלַאכְתּוֹ אֲשֶׁר עָשָׂה, וַיִּשְׁבֹּת בַּיּוֹם הַשְּׁבִיעִי מִכָּל מְלַאכְתּוֹ אֲשֶׁר עָשָׂה׃ וַיְבָרֶךְ אֱלֹהִים אֶת יוֹם הַשְּׁבִיעִי וַיְקַדֵּשׁ אֹתוֹ, כִּי בוֹ שָׁבַת מִכָּל מְלַאכְתּוֹ אֲשֶׁר בָּרָא אֱלֹהִים לַעֲשׂוֹת׃</div>
+      <div class="ph">Vayekhoulou hachamayim vehaarets vekhol tsevaam. Vaykhal Elohim bayom hachevii melakhto acher assa, vayichbot bayom hachevii mikol melakhto acher assa. Vayvarekh Elohim et yom hachevii vaykadech oto, ki vo chavat mikol melakhto acher bara Elohim laassot.</div>
+      <div class="fr">Ainsi furent achevés le ciel et la terre, avec toute leur armée. Dieu eut achevé, le septième jour, l’œuvre qu’il avait faite, et il se reposa le septième jour de toute l’œuvre qu’il avait faite. Dieu bénit le septième jour et le sanctifia, car en ce jour il s’était reposé de toute l’œuvre qu’il avait créée et organisée.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">La coupe</div>
+      <div class="didascalie">Le célébrant : « Savri maranan. » Les convives : « Lehayim. »</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא פְּרִי הַגֶּפֶן׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, boré peri haguéfen.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui crées le fruit de la vigne.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">La sanctification du jour</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, אֲשֶׁר בָּחַר בָּנוּ מִכָּל עָם וְרוֹמְמָנוּ מִכָּל לָשׁוֹן וְקִדְּשָׁנוּ בְּמִצְוֹתָיו. וַתִּתֶּן לָנוּ יְיָ אֱלֹהֵינוּ בְּאַהֲבָה שַׁבָּתוֹת לִמְנוּחָה וּמוֹעֲדִים לְשִׂמְחָה, חַגִּים וּזְמַנִּים לְשָׂשׂוֹן, אֶת יוֹם הַשַּׁבָּת הַזֶּה וְאֶת יוֹם הַזִּכָּרוֹן הַזֶּה, יוֹם זִכְרוֹן תְּרוּעָה בְּאַהֲבָה מִקְרָא קֹדֶשׁ זֵכֶר לִיצִיאַת מִצְרָיִם. כִּי בָנוּ בָחַרְתָּ וְאוֹתָנוּ קִדַּשְׁתָּ מִכָּל הָעַמִּים, וְשַׁבָּת וּמוֹעֲדֵי קָדְשֶׁךָ בְּאַהֲבָה וּבְרָצוֹן בְּשִׂמְחָה וּבְשָׂשׂוֹן הִנְחַלְתָּנוּ. בָּרוּךְ אַתָּה יְיָ, מֶלֶךְ עַל כָּל הָאָרֶץ, מְקַדֵּשׁ הַשַּׁבָּת וְיִשְׂרָאֵל וְיוֹם הַזִּכָּרוֹן׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, acher bahar banou mikol am veromemanou mikol lachon vekidchanou bemitsvotav. Vatiten lanou Adonaï Elohénou beahava chabbatot limnouha oumoadim lessimha, haguim ouzmanim lessasson, et yom haChabbat hazé veet yom hazikaron hazé, yom zikhron teroua beahava mikra kodech zekher litsiat Mitsrayim. Ki vanou vaharta veotanou kidachta mikol haamim, vechabbat oumoadei kodchekha beahava ouvratson bessimha ouvsasson hinhaltanou. Baroukh ata Adonaï, mélekh al kol haarets, mekadech haChabbat vé-Israël veyom hazikaron.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as choisis d’entre tous les peuples, nous as élevés au-dessus de toute langue et nous as sanctifiés par ses commandements. Tu nous as donné, Éternel notre Dieu, avec amour, des chabbats pour le repos et des fêtes pour la joie, des solennités et des temps pour l’allégresse : ce jour de Chabbat et ce jour du Souvenir, jour du mémorial de la sonnerie, avec amour, sainte convocation, en souvenir de la sortie d’Égypte. Car c’est nous que Tu as choisis et nous que Tu as sanctifiés d’entre tous les peuples, et Tu nous as donné en héritage ton Chabbat et tes saintes fêtes, avec amour et faveur, dans la joie et l’allégresse. Béni sois-Tu, Éternel, Roi de toute la terre, qui sanctifies le Chabbat, Israël et le jour du Souvenir.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">Chéhé’héyanou</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, chéhé’héyanou vekiyemanou vehiguianou lazman hazé.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as fait vivre, nous as maintenus et nous as fait parvenir à cette époque.</div>
+    </section>
+
+    <section class="encadre">
+      <div class="etiquette">Puis</div>
+      <p>On boit la coupe, on se lave les mains, on dit <b>Hamotsi</b> — et le pain se trempe dans le miel. Le seder des signes vient ensuite : il est au recto de cette feuille.</p>
+    </section>
+
+  </div>
+
+  <footer class="pied">
+    <div class="sig">Moadim</div>
+    <div>Le texte suit le rite séfarade,<br>d’après le corpus de l’application.</div>
+    <div class="qr">
+      __QR__
+      <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
+    </div>
+  </footer>
+  <div class="bat-marque"><span>BAT v2 — page 2 — Kiddouch du premier soir</span><span>Moadim · Roch Hachana 5787</span></div>
+</section>
+
+<!-- ================== LE KIDDOUCH — SECOND SOIR ================== -->
+<section class="feuille page-priere">
+  <div class="fond"></div>__MARQUES__
+  <header class="tete">
+    <div class="identite">
+      <div class="logo petit" role="img" aria-label="Moadim"></div>
+      <div class="titrage">
+        <div class="offre">La feuille de miel — le Kiddouch</div>
+        <h1>Le second soir</h1>
+        <div class="rite">Samedi 12 septembre au soir — à la sortie du Chabbat</div>
+      </div>
+      <div class="dates">
+        <b class="annee">Texte prêt à lire</b>
+        Sans les passages du Chabbat,<br>mais <b>avec la Havdala</b>.
+      </div>
+    </div>
+  </header>
+
+  <div class="priere">
+
+    <section class="mouvement">
+      <div class="etiquette">La coupe</div>
+      <div class="didascalie">Le célébrant : « Savri maranan. » Les convives : « Lehayim. »</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא פְּרִי הַגֶּפֶן׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, boré peri haguéfen.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui crées le fruit de la vigne.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">La sanctification du jour</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, אֲשֶׁר בָּחַר בָּנוּ מִכָּל עָם וְרוֹמְמָנוּ מִכָּל לָשׁוֹן וְקִדְּשָׁנוּ בְּמִצְוֹתָיו. וַתִּתֶּן לָנוּ יְיָ אֱלֹהֵינוּ בְּאַהֲבָה מוֹעֲדִים לְשִׂמְחָה, חַגִּים וּזְמַנִּים לְשָׂשׂוֹן, אֶת יוֹם הַזִּכָּרוֹן הַזֶּה, יוֹם תְּרוּעָה מִקְרָא קֹדֶשׁ זֵכֶר לִיצִיאַת מִצְרָיִם. כִּי בָנוּ בָחַרְתָּ וְאוֹתָנוּ קִדַּשְׁתָּ מִכָּל הָעַמִּים, וּמוֹעֲדֵי קָדְשֶׁךָ בְּשִׂמְחָה וּבְשָׂשׂוֹן הִנְחַלְתָּנוּ. בָּרוּךְ אַתָּה יְיָ, מֶלֶךְ עַל כָּל הָאָרֶץ, מְקַדֵּשׁ יִשְׂרָאֵל וְיוֹם הַזִּכָּרוֹן׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, acher bahar banou mikol am veromemanou mikol lachon vekidchanou bemitsvotav. Vatiten lanou Adonaï Elohénou beahava moadim lessimha, haguim ouzmanim lessasson, et yom hazikaron hazé, yom teroua mikra kodech zekher litsiat Mitsrayim. Ki vanou vaharta veotanou kidachta mikol haamim, oumoadei kodchekha bessimha ouvsasson hinhaltanou. Baroukh ata Adonaï, mélekh al kol haarets, mekadech Israël veyom hazikaron.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as choisis d’entre tous les peuples, nous as élevés au-dessus de toute langue et nous as sanctifiés par ses commandements. Tu nous as donné, Éternel notre Dieu, avec amour, des fêtes pour la joie, des solennités et des temps pour l’allégresse : ce jour du Souvenir, jour de la sonnerie, sainte convocation, en souvenir de la sortie d’Égypte. Car c’est nous que Tu as choisis et nous que Tu as sanctifiés d’entre tous les peuples, et Tu nous as donné en héritage tes saintes fêtes, dans la joie et l’allégresse. Béni sois-Tu, Éternel, Roi de toute la terre, qui sanctifies Israël et le jour du Souvenir.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">La Havdala</div>
+      <div class="didascalie">On regarde ses ongles à la lumière des bougies de la fête.</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא מְאוֹרֵי הָאֵשׁ׃ בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, הַמַּבְדִּיל בֵּין קֹדֶשׁ לְחֹל, בֵּין אוֹר לְחֹשֶׁךְ, בֵּין יִשְׂרָאֵל לָעַמִּים, בֵּין יוֹם הַשְּׁבִיעִי לְשֵׁשֶׁת יְמֵי הַמַּעֲשֶׂה. בֵּין קְדֻשַּׁת שַׁבָּת לִקְדֻשַּׁת יוֹם טוֹב הִבְדַּלְתָּ, וְאֶת יוֹם הַשְּׁבִיעִי מִשֵּׁשֶׁת יְמֵי הַמַּעֲשֶׂה קִדַּשְׁתָּ. הִבְדַּלְתָּ וְקִדַּשְׁתָּ אֶת עַמְּךָ יִשְׂרָאֵל בִּקְדֻשָּׁתֶךָ. בָּרוּךְ אַתָּה יְיָ, הַמַּבְדִּיל בֵּין קֹדֶשׁ לְקֹדֶשׁ׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, boré meoré haech. Baroukh ata Adonaï, Elohénou mélekh haolam, hamavdil ben kodech lehol, ben or lehochekh, ben Israël laamim, ben yom hachevii lecheche yemé hamaassé. Ben kedouchat Chabbat likdouchat yom tov hivdalta, veet yom hachevii michéchet yemé hamaassé kidachta. Hivdalta vekidachta et amekha Israël bikdouchatekha. Baroukh ata Adonaï, hamavdil ben kodech lekodech.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui crées les lumières du feu. Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui sépares le sacré du profane, la lumière des ténèbres, Israël des nations, le septième jour des six jours de l’œuvre. Tu as distingué la sainteté du Chabbat de la sainteté du jour de fête, et Tu as sanctifié le septième jour au-dessus des six jours de l’œuvre. Tu as distingué et sanctifié ton peuple Israël par ta sainteté. Béni sois-Tu, Éternel, qui sépares le sacré du sacré.</div>
+    </section>
+
+    <section class="mouvement">
+      <div class="etiquette">Chéhé’héyanou</div>
+      <div class="didascalie">On pose le regard sur le fruit nouveau avant de dire la bénédiction.</div>
+      <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה׃</div>
+      <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, chéhé’héyanou vekiyemanou vehiguianou lazman hazé.</div>
+      <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as fait vivre, nous as maintenus et nous as fait parvenir à cette époque.</div>
+    </section>
+
+    <section class="encadre">
+      <div class="etiquette">L’ordre du second soir</div>
+      <p>Cinq gestes, dans cet ordre : le <b>vin</b>, le <b>Kiddouch</b> du jour, la <b>lumière</b> des bougies, la <b>Havdala</b> qui sépare le Chabbat de la fête, puis <b>Chéhé’héyanou</b> sur le fruit nouveau.</p>
+    </section>
+
+  </div>
+
+  <footer class="pied">
+    <div class="sig">Moadim</div>
+    <div>Le texte suit le rite séfarade,<br>d’après le corpus de l’application.</div>
+    <div class="qr">
+      __QR__
+      <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
+    </div>
+  </footer>
+  <div class="bat-marque"><span>BAT v2 — page 3 — Kiddouch du second soir</span><span>Moadim · Roch Hachana 5787</span></div>
+</section>
+<!--/KIDDOUCH-->
+
+<!-- ================== AUTOUR DE LA TABLE ================== -->
 <section class="feuille">
   <div class="fond"></div>__MARQUES__
   <header class="tete">
@@ -325,7 +486,7 @@
       <p><b>Allumage.</b> Vendredi 11 septembre avant l’entrée de la fête — cette année Chabbat et Yom Tov ensemble :</p>
       <p class="he">לְהַדְלִיק נֵר שֶׁל שַׁבָּת וְשֶׁל יוֹם טוֹב</p>
       <p class="ph">…lehadlik ner chel Chabbat vechel Yom Tov, puis Chéhé’héyanou.</p>
-      <p><b>Kiddouch</b>, puis lavage des mains et <b>Hamotsi</b>.</p>
+      <p><b>Kiddouch</b><!--C--> — son texte complet est aux pages 2 et 3<!--/C-->, puis lavage des mains et <b>Hamotsi</b>.</p>
       <p><b>Le pain se trempe dans le miel</b> — et non dans le sel — jusqu’à Hocha’na Rabba. Beaucoup de familles font les deux : une pointe de sel, puis le miel.</p>
     </section>
 
@@ -405,7 +566,7 @@
       <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
     </div>
   </footer>
-  <div class="bat-marque"><span>BAT v1 — verso — 27.08.2026 — bon à tirer : date …………… signature ……………</span><span>A4 · recto-verso · reliure bord long</span></div>
+  <div class="bat-marque"><span>BAT v2 — autour de la table — bon à tirer : date …………… signature ……………</span><span>A4 · recto-verso · reliure bord long</span></div>
 </section>
 
 <script>

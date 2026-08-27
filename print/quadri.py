@@ -13,8 +13,7 @@ import subprocess
 import pikepdf
 
 ICI = pathlib.Path(__file__).parent
-SOURCE = ICI / "dist" / "feuille-miel-5787-quadri.pdf"
-CIBLE = ICI / "dist" / "feuille-miel-5787-quadri-BAT.pdf"
+DIST = ICI / "dist"
 
 MM = 72 / 25.4
 ROGNE, FOND_PERDU = 8, 3          # mm, cf. build.py
@@ -26,8 +25,9 @@ def boite(marge: float) -> list[float]:
             (marge, marge, MEDIA_L - marge, MEDIA_H - marge)]
 
 
-def main() -> None:
-    intermediaire = CIBLE.with_suffix(".cmjn.tmp.pdf")
+def convertir(source: pathlib.Path) -> None:
+    cible = source.with_name(source.stem + "-BAT.pdf")
+    intermediaire = cible.with_suffix(".tmp.pdf")
     subprocess.run(
         ["gs", "-dSAFER", "-dBATCH", "-dNOPAUSE", "-dQUIET",
          "-sDEVICE=pdfwrite", "-dPDFSETTINGS=/prepress",
@@ -35,16 +35,22 @@ def main() -> None:
          "-dEmbedAllFonts=true", "-dSubsetFonts=true", "-dAutoRotatePages=/None",
          "-dDownsampleColorImages=false", "-dDownsampleGrayImages=false",
          "-dDownsampleMonoImages=false", "-dCompatibilityLevel=1.4",
-         f"-o{intermediaire}", str(SOURCE)],
+         f"-o{intermediaire}", str(source)],
         check=True,
     )
     with pikepdf.open(intermediaire) as pdf:
         for page in pdf.pages:
             page.TrimBox = boite(ROGNE)
             page.BleedBox = boite(ROGNE - FOND_PERDU)
-        pdf.save(CIBLE, linearize=True)
+        pdf.save(cible, linearize=True)
     intermediaire.unlink()
-    print(f"{CIBLE}  {CIBLE.stat().st_size // 1024} Ko")
+    source.unlink()
+    print(f"{cible}  {cible.stat().st_size // 1024} Ko  ({len(pikepdf.open(cible).pages)} pages)")
+
+
+def main() -> None:
+    for source in sorted(DIST.glob("*-quadri.pdf")):
+        convertir(source)
 
 
 if __name__ == "__main__":

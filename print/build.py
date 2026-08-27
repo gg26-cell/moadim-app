@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Fabrique la feuille de miel à partir de `feuille-miel-simanim.src.html`.
 
-Trois sorties dans `dist/` :
-  bureau.html   A4 nu, pour l'imprimante de bureau
-  quadri.html   226 × 313 mm : A4 + 3 mm de fond perdu + traits de coupe, pour l'imprimeur
-  apercu-artifact.html   le même document sans enveloppe html/body, pour publication en Artifact
+Deux versions, chacune en deux sorties :
+  complete   4 pages — signes, Kiddouch du 1er soir, Kiddouch du 2e soir, autour de la table
+  courte     2 pages — signes et autour de la table, sans le Kiddouch
+  …-A4       page A4 nue, pour l'imprimante de bureau
+  …-quadri   226 × 313 mm : A4 + 3 mm de fond perdu + traits de coupe, pour l'imprimeur
+Plus `apercu-artifact.html` : la version complète sans enveloppe html/body, pour un Artifact.
 
 Usage : python3 print/build.py
 """
@@ -86,6 +88,17 @@ def traits_de_coupe() -> str:
             f'<g stroke="#000" stroke-width="0.12">{traits}</g></svg>')
 
 
+def sans_kiddouch(gabarit: str) -> str:
+    """Retire les deux pages de Kiddouch : il reste les signes et le verso."""
+    debut, reste = gabarit.split("<!--KIDDOUCH-->", 1)
+    court = debut + reste.split("<!--/KIDDOUCH-->", 1)[1]
+    # les renvois « voir pages 2 et 3 » n'ont plus d'objet
+    while "<!--C-->" in court:
+        avant, suite = court.split("<!--C-->", 1)
+        court = avant + suite.split("<!--/C-->", 1)[1]
+    return court
+
+
 def ecrire(cible: pathlib.Path, contenu: str) -> None:
     cible.write_text(contenu, encoding="utf-8")
     print(f"{cible}  {cible.stat().st_size // 1024} Ko")
@@ -99,18 +112,21 @@ def main() -> None:
               .replace("__LOGO__", logo_css(LOGO)))
     DIST.mkdir(exist_ok=True)
 
-    sorties = [
-        ("feuille-miel-5787-bureau-A4", "A4", "", ""),
-        ("feuille-miel-5787-quadri", f"{MEDIA_L}mm {MEDIA_H}mm", traits_de_coupe(), ' class="bat quadri"'),
+    versions = {"complete": commun.replace("<!--C-->", "").replace("<!--/C-->", ""),
+                "courte": sans_kiddouch(commun)}
+    formats = [
+        ("A4", "A4", "", ""),
+        ("quadri", f"{MEDIA_L}mm {MEDIA_H}mm", traits_de_coupe(), ' class="bat quadri"'),
     ]
-    for nom, page, marques, classe in sorties:
-        corps = commun.replace("__PAGE__", page).replace("__MARQUES__", marques)
-        tete, reste = corps.split("</style>", 1)
-        ecrire(DIST / f"{nom}.html",
-               f'<!doctype html>\n<html lang="fr"><head>{tete}</style></head>'
-               f"<body{classe}>{reste}</body></html>")
+    for version, texte in versions.items():
+        for suffixe, page, marques, classe in formats:
+            corps = texte.replace("__PAGE__", page).replace("__MARQUES__", marques)
+            tete, reste = corps.split("</style>", 1)
+            ecrire(DIST / f"feuille-miel-5787-{version}-{suffixe}.html",
+                   f'<!doctype html>\n<html lang="fr"><head>{tete}</style></head>'
+                   f"<body{classe}>{reste}</body></html>")
 
-    apercu = commun.replace("__PAGE__", "A4").replace("__MARQUES__", "")
+    apercu = versions["complete"].replace("__PAGE__", "A4").replace("__MARQUES__", "")
     ecrire(DIST / "apercu-artifact.html", apercu)
 
 
