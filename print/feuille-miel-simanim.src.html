@@ -1,0 +1,390 @@
+<meta charset="utf-8">
+<title>Feuille de miel — Roch Hachana 5787</title>
+<style>
+  /* Palette « Parchemin » de la charte Moadim — thème clair, encre économe. */
+  :root {
+    --fond:      #FBF4E4;
+    --parchemin: #EAD8B4;
+    --creux:     #E9DCC1;
+    --encre:     #2C2417;
+    --encre2:    #655B46;
+    --bronze:    #7A4F0F;
+    --filet:     #A6863F;
+  }
+  __FONTS__
+
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: var(--fond); color: var(--encre);
+    font-family: "Public Sans", -apple-system, sans-serif;
+    font-size: 9.6pt; line-height: 1.45;
+  }
+  .feuille {
+    width: 210mm; height: 297mm; padding: 11mm 13mm 8mm;
+    background: var(--fond); position: relative;
+    display: flex; flex-direction: column; overflow: hidden;
+    page-break-after: always; break-after: page;
+  }
+  .feuille:last-of-type { page-break-after: auto; break-after: auto; }
+
+  /* ---------- en-tête ---------- */
+  .tete { border-bottom: 1.6pt solid var(--filet); padding-bottom: 3.4mm; margin-bottom: 4mm; }
+  .marque {
+    font-size: 7.4pt; letter-spacing: 3.4px; text-transform: uppercase;
+    color: var(--bronze); font-weight: 700;
+  }
+  h1 {
+    font-family: Fraunces, Georgia, serif; font-weight: 700;
+    font-size: 27pt; line-height: 1.05; margin-top: 1.5mm; letter-spacing: -0.3px;
+  }
+  .sous { display: flex; justify-content: space-between; align-items: baseline; margin-top: 2mm; gap: 6mm; }
+  .sous .rite { font-size: 10pt; color: var(--encre2); }
+  .sous .dates { font-size: 8.4pt; color: var(--encre2); text-align: right; line-height: 1.4; }
+  .sous .dates b { color: var(--encre); font-weight: 600; }
+
+  /* ---------- bandeau d'ouverture ---------- */
+  .ouverture {
+    background: var(--creux); border-left: 2.4pt solid var(--filet);
+    padding: 3mm 4.5mm; margin-bottom: 3.6mm;
+    display: flex; align-items: center; gap: 6mm;
+  }
+  .ouverture .g { flex: 1 1 0; }
+  .ouverture .titre {
+    font-size: 7.2pt; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--bronze); font-weight: 700; margin-bottom: 1.4mm;
+  }
+  .ouverture .fr { font-size: 9.2pt; line-height: 1.4; }
+  .ouverture .ph { font-size: 8.4pt; font-style: italic; color: var(--encre2); margin-top: 0.8mm; }
+  .ouverture .he { flex: 0 0 78mm; text-align: right; }
+
+  .he {
+    font-family: "Frank Ruhl Libre", "Times New Roman", serif;
+    direction: rtl; unicode-bidi: isolate; font-size: 14.5pt; line-height: 1.7;
+  }
+
+  /* ---------- grille des signes ---------- */
+  .signes {
+    flex: 1 1 auto; display: grid; grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr; gap: 2.4mm 5mm;
+  }
+  .signe { display: flex; gap: 3.2mm; padding-bottom: 1.9mm; border-bottom: 0.5pt solid rgba(166,134,63,.45); }
+  .signe:nth-last-child(-n+2) { border-bottom: 0; padding-bottom: 0; }
+  .num {
+    flex: 0 0 7.4mm; height: 7.4mm; border-radius: 50%;
+    background: var(--parchemin); border: 0.8pt solid var(--filet);
+    color: var(--bronze); font-family: Fraunces, serif; font-weight: 700;
+    font-size: 10.5pt; display: flex; align-items: center; justify-content: center;
+  }
+  .corps { flex: 1 1 auto; min-width: 0; }
+  .nom {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 3mm;
+    border-bottom: 0.5pt dotted rgba(122,79,15,.45); padding-bottom: 1.2mm; margin-bottom: 1.6mm;
+  }
+  .nom .fr {
+    font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 12pt; line-height: 1.15;
+  }
+  .nom .hb { font-family: "Frank Ruhl Libre", serif; direction: rtl; font-size: 11.5pt; color: var(--bronze); white-space: nowrap; }
+  .signe .he { font-size: 13pt; line-height: 1.65; }
+  .signe .ph { font-size: 8pt; font-style: italic; color: var(--encre2); margin-top: 0.6mm; }
+  .signe .tr { font-size: 9.3pt; margin-top: 1.2mm; }
+  .signe .note { font-size: 7.6pt; color: var(--encre2); margin-top: 1.4mm; line-height: 1.35; }
+  .signe .note b { color: var(--bronze); font-weight: 600; }
+  .brk {
+    display: inline-block; font-size: 7.2pt; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--bronze); border: 0.6pt solid var(--filet); border-radius: 2mm;
+    padding: 0.4mm 1.6mm; margin-bottom: 1.4mm; font-weight: 600;
+  }
+
+  /* ---------- verso ---------- */
+  .colonnes { flex: 1 1 auto; display: flex; gap: 7mm; align-items: flex-start; }
+  .col { flex: 1 1 0; min-width: 0; }
+  .bloc { margin-bottom: 5mm; }
+  .bloc:last-child { margin-bottom: 0; }
+  .bloc h2 {
+    font-family: Fraunces, Georgia, serif; font-size: 12.5pt; font-weight: 600; color: var(--bronze);
+    border-bottom: 1pt solid var(--filet); padding-bottom: 1.2mm; margin-bottom: 2.2mm;
+  }
+  .bloc p { margin-bottom: 2mm; }
+  .bloc p:last-child { margin-bottom: 0; }
+  .bloc .he { font-size: 12.5pt; line-height: 1.6; }
+  .bloc .ph { font-size: 8.2pt; font-style: italic; color: var(--encre2); }
+  .bloc em { color: var(--encre2); font-style: italic; }
+  .alerte { background: var(--parchemin); border: 0.8pt solid var(--filet); border-radius: 2mm; padding: 3mm 3.6mm; }
+  .alerte h2 { border-bottom-color: rgba(122,79,15,.4); }
+  .cases { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 4mm; }
+  .cases li { position: relative; padding-left: 5mm; font-size: 9pt; line-height: 1.3; }
+  .cases li::before {
+    content: ""; position: absolute; left: 0; top: 0.7mm;
+    width: 3mm; height: 3mm; border: 0.8pt solid var(--filet); border-radius: 0.6mm;
+  }
+  .liste { list-style: none; }
+  .liste li { position: relative; padding-left: 4mm; margin-bottom: 1.6mm; }
+  .liste li::before { content: "·"; position: absolute; left: 1.2mm; color: var(--bronze); font-weight: 700; }
+
+  /* ---------- pied ---------- */
+  .pied {
+    margin-top: 3mm; padding-top: 2.4mm; border-top: 1pt solid var(--filet);
+    display: flex; align-items: center; justify-content: space-between; gap: 5mm;
+    font-size: 7.6pt; color: var(--encre2);
+  }
+  .pied .sig { font-family: Fraunces, serif; font-weight: 700; font-size: 10pt; color: var(--bronze); letter-spacing: 0.3px; }
+  .pied .qr { display: flex; align-items: center; gap: 2.6mm; }
+  .pied .qr svg { width: 16mm; height: 16mm; display: block; }
+  .pied .qr .t { font-size: 7.4pt; line-height: 1.35; }
+  .pied .qr .t b { color: var(--encre); font-weight: 600; }
+
+  .bat-marque {
+    position: absolute; left: 13mm; right: 13mm; bottom: 4mm;
+    font-size: 6.6pt; letter-spacing: 0.4px; color: var(--filet);
+    display: flex; justify-content: space-between;
+  }
+  body:not(.bat) .bat-marque { display: none; }
+
+  /* Aperçu à l'écran — sans effet sur l'impression. */
+  @media screen {
+    body {
+      background: var(--creux); padding: 14px 0 34px;
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+    }
+    .feuille { zoom: var(--zoom, 1); box-shadow: 0 8px 26px rgba(44,36,23,.28); }
+  }
+  @media screen and (prefers-color-scheme: dark) { body { background: #1E2743; } }
+  body.bat .feuille { padding-bottom: 12mm; }
+</style>
+
+<!-- ================== RECTO ================== -->
+<section class="feuille">
+  <header class="tete">
+    <div class="marque">Moadim</div>
+    <h1>La feuille de miel</h1>
+    <div class="sous">
+      <div class="rite">Le seder des signes — <b>Roch Hachana 5787</b>, usage tunisien</div>
+      <div class="dates">
+        Entrée de la fête <b>vendredi 11 septembre 2026</b> au soir<br>
+        1<sup>er</sup> Tichri : <b>samedi 12</b> · second jour : <b>dimanche 13</b>
+      </div>
+    </div>
+  </header>
+
+  <div class="ouverture">
+    <div class="g">
+      <div class="titre">On ouvre une fois, puis on enchaîne signe après signe</div>
+      <div class="fr">« Qu’il soit Ta volonté, Éternel notre Dieu et Dieu de nos pères… »</div>
+      <div class="ph">Yehi ratson milfanékha, Adonaï Elohénou vÉlohé avoténou…</div>
+    </div>
+    <div class="he">יְהִי רָצוֹן מִלְּפָנֶיךָ, יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ</div>
+  </div>
+
+  <div class="signes">
+
+    <article class="signe">
+      <div class="num">1</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La datte</span><span class="hb">תָּמָר</span></div>
+        <span class="brk">Boré peri haets</span>
+        <div class="he">שֶׁיִּתַּמּוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכָל מְבַקְשֵׁי רָעָתֵנוּ</div>
+        <div class="ph">chéyitamou oyvénou vessonénou vekhol mevakché raaténou</div>
+        <div class="tr">Que prennent fin ceux qui nous veulent du mal.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">2</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La pomme au miel</span><span class="hb">תַּפּוּחַ בִּדְבַשׁ</span></div>
+        <div class="he">שֶׁתְּחַדֵּשׁ עָלֵינוּ שָׁנָה טוֹבָה וּמְתוּקָה</div>
+        <div class="ph">chétehadech alénou chana tova oumtouka</div>
+        <div class="tr">Renouvelle sur nous une année bonne et douce.</div>
+        <div class="note">Le cœur de la table : c’est de ce miel que la feuille tient son nom.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">3</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La grenade</span><span class="hb">רִמּוֹן</span></div>
+        <div class="he">שֶׁנִּהְיֶה מְלֵאִים מִצְוֹת כָּרִמּוֹן</div>
+        <div class="ph">chénihyé mélé’im mitsvot karimon</div>
+        <div class="tr">Que nous soyons remplis de mitsvot comme la grenade l’est de grains.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">4</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La loubia</span><span class="hb">רוּבִּיָּא</span></div>
+        <div class="he">שֶׁיִּרְבּוּ זְכֻיּוֹתֵינוּ</div>
+        <div class="ph">chéyirbou zekhouyoténou</div>
+        <div class="tr">Que nos mérites se multiplient.</div>
+        <div class="note">Haricots noirs ou cornilles, selon ce qu’on trouve au marché.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">5</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La courge</span><span class="hb">קְרָא</span></div>
+        <span class="brk">Boré peri haadama</span>
+        <div class="he">שֶׁתִּקְרַע רוֹעַ גְּזַר דִּינֵנוּ, וְיִקָּרְאוּ לְפָנֶיךָ זְכֻיּוֹתֵינוּ</div>
+        <div class="ph">chétikra roa gzar dinénou, veyikarou lefanékha zekhouyoténou</div>
+        <div class="tr">Déchire ce que notre jugement aurait de dur, et que nos mérites soient lus devant Toi.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">6</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">Le poireau</span><span class="hb">כַּרְתִּי</span></div>
+        <div class="he">שֶׁיִּכָּרְתוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכָל מְבַקְשֵׁי רָעָתֵנוּ</div>
+        <div class="ph">chéyikartou oyvénou vessonénou vekhol mevakché raaténou</div>
+        <div class="tr">Que soient retranchés ceux qui nous veulent du mal.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">7</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">Les blettes</span><span class="hb">סִלְקָא</span></div>
+        <div class="he">שֶׁיִּסְתַּלְּקוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכָל מְבַקְשֵׁי רָעָתֵנוּ</div>
+        <div class="ph">chéyistalkou oyvénou vessonénou vekhol mevakché raaténou</div>
+        <div class="tr">Que s’écartent ceux qui nous veulent du mal.</div>
+      </div>
+    </article>
+
+    <article class="signe">
+      <div class="num">8</div>
+      <div class="corps">
+        <div class="nom"><span class="fr">La tête</span><span class="hb">רֹאשׁ</span></div>
+        <div class="he">שֶׁנִּהְיֶה לְרֹאשׁ וְלֹא לְזָנָב</div>
+        <div class="ph">chénihyé leroch velo lezanav</div>
+        <div class="tr">Que nous soyons à la tête et non à la queue.</div>
+        <div class="note">Tête d’agneau ou de poisson. Sur une tête d’agneau on ajoute : <b>zékher leélo chel Yits’hak</b> — en souvenir du bélier d’Its’hak.</div>
+      </div>
+    </article>
+
+  </div>
+
+  <footer class="pied">
+    <div class="sig">Moadim</div>
+    <div>Les fêtes, leurs horaires et leurs textes — dans la poche.</div>
+    <div class="qr">
+      __QR__
+      <div class="t"><b>get.moadim.app</b><br>Application iPhone gratuite</div>
+    </div>
+  </footer>
+  <div class="bat-marque"><span>BAT v1 — recto — 27.08.2026</span><span>Moadim · Roch Hachana 5787</span></div>
+</section>
+
+<!-- ================== VERSO ================== -->
+<section class="feuille">
+  <header class="tete">
+    <div class="marque">Moadim · la feuille de miel</div>
+    <h1>Autour de la table</h1>
+    <div class="sous">
+      <div class="rite">Les gestes qui entourent les signes, du vendredi soir au dimanche</div>
+      <div class="dates">Roch Hachana <b>5787</b><br>11 → 13 septembre 2026</div>
+    </div>
+  </header>
+
+  <div class="colonnes">
+   <div class="col">
+
+    <section class="bloc">
+      <h2>Avant les signes</h2>
+      <p><b>Allumage.</b> Vendredi 11 septembre avant l’entrée de la fête — cette année Chabbat et Yom Tov ensemble :</p>
+      <p class="he">לְהַדְלִיק נֵר שֶׁל שַׁבָּת וְשֶׁל יוֹם טוֹב</p>
+      <p class="ph">…lehadlik ner chel Chabbat vechel Yom Tov, puis Chéhé’héyanou.</p>
+      <p><b>Kiddouch</b>, puis lavage des mains et <b>Hamotsi</b>.</p>
+      <p><b>Le pain se trempe dans le miel</b> — et non dans le sel — jusqu’à Hocha’na Rabba. Beaucoup de familles font les deux : une pointe de sel, puis le miel.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Quand dit-on les signes ?</h2>
+      <p>Selon l’usage de la famille, juste après le kiddouch ou une fois le pain entamé. Quand le seder se fait <em>avant</em> le pain, la datte ouvre la série avec <b>Boré peri haets</b> et la courge appelle <b>Boré peri haadama</b> ; après le pain, ces deux bénédictions ne sont plus nécessaires.</p>
+    </section>
+
+    <section class="bloc alerte">
+      <h2>Le shofar — particularité de 5787</h2>
+      <p>Le 1<sup>er</sup> Tichri tombe <b>un samedi</b> : on ne sonne pas le shofar le premier jour. Les sonneries sont reportées au <b>second jour, dimanche 13 septembre</b>.</p>
+      <p class="he">לִשְׁמֹעַ קוֹל שׁוֹפָר</p>
+      <p class="ph">…lichmoa kol chofar, puis Chéhé’héyanou.</p>
+      <p>Pour la même raison, le <b>Tachlikh</b> se reporte lui aussi au dimanche après-midi.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Les cent sonneries</h2>
+      <p class="he">תְּקִיעָה · שְׁבָרִים · תְּרוּעָה</p>
+      <p>Trois sons, toujours dans le même ordre : la <b>tekia</b>, un souffle long et plein ; les <b>chevarim</b>, trois sons brisés comme des soupirs ; la <b>teroua</b>, une rafale de sons courts. On en compte <b>cent</b> au cours de l’office — cette année, le dimanche.</p>
+    </section>
+
+   </div>
+   <div class="col">
+
+    <section class="bloc">
+      <h2>Le second soir</h2>
+      <p>On pose sur la table un <b>fruit nouveau</b> — un de ceux qu’on n’a pas encore goûtés cette saison — pour dire Chéhé’héyanou sans hésitation au kiddouch du soir.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Ce qu’on écarte</h2>
+      <ul class="liste">
+        <li>Rien d’amer, rien d’acide, pas de vinaigre : la table doit dire la douceur qu’on demande.</li>
+        <li>L’usage répandu d’écarter les <b>noix</b> — elles chargent la gorge, qui doit rester nette pour la prière, et leur nom fait écho à celui de la faute.</li>
+      </ul>
+    </section>
+
+    <section class="bloc">
+      <h2>Les vœux</h2>
+      <p class="he">תִּזְכּוּ לְשָׁנִים רַבּוֹת</p>
+      <p class="ph">Tizkou léchanim rabbot — « puissiez-vous compter de nombreuses années » ; on répond <em>néimot vetovot</em>, douces et bonnes.</p>
+      <p>Et le vœu le plus simple, celui que le miel dit à votre place : <b>chana tova oumtouka</b>.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>À prévoir sur la table</h2>
+      <ul class="cases">
+        <li>Des dattes</li>
+        <li>Une pomme</li>
+        <li>Du miel</li>
+        <li>Une grenade</li>
+        <li>De la loubia</li>
+        <li>De la courge</li>
+        <li>Du poireau</li>
+        <li>Des blettes</li>
+        <li>Une tête d’agneau<br>ou de poisson</li>
+        <li>Un pain rond</li>
+        <li>Un fruit nouveau<br>pour le second soir</li>
+        <li>Bougies et vin</li>
+      </ul>
+    </section>
+
+    <section class="bloc">
+      <h2>Sur cette feuille</h2>
+      <p>L’ordre et les formules suivent l’usage courant en Tunisie. D’une famille à l’autre, la grenade et la pomme s’échangent, la langue ou le poisson s’ajoutent, une formule se dit autrement. <em>Gardez l’usage de votre maison — c’est lui qui fait le seder.</em></p>
+    </section>
+
+   </div>
+  </div>
+
+  <footer class="pied">
+    <div class="sig">Moadim</div>
+    <div>Horaires de la fête, textes en hébreu, phonétique et français,<br>bénédictions et gestes — pour chaque fête de l’année.</div>
+    <div class="qr">
+      __QR__
+      <div class="t"><b>get.moadim.app</b><br>Application iPhone gratuite</div>
+    </div>
+  </footer>
+  <div class="bat-marque"><span>BAT v1 — verso — 27.08.2026 — bon à tirer : date …………… signature ……………</span><span>A4 · recto-verso · reliure bord long</span></div>
+</section>
+
+<script>
+  // Aperçu écran : on ramène la feuille A4 (794 px) à la largeur disponible.
+  const ajusterEchelle = () => {
+    const dispo = Math.min(document.documentElement.clientWidth - 24, 794)
+    document.documentElement.style.setProperty('--zoom', (dispo / 794).toFixed(4))
+  }
+  ajusterEchelle()
+  addEventListener('resize', ajusterEchelle)
+</script>
