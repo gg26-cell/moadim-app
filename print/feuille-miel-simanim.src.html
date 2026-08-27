@@ -13,7 +13,7 @@
   }
   __FONTS__
 
-  @page { size: A4; margin: 0; }
+  @page { size: __PAGE__; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body {
@@ -23,26 +23,45 @@
   }
   .feuille {
     width: 210mm; height: 297mm; padding: 11mm 13mm 8mm;
-    background: var(--fond); position: relative;
+    background: #fff; position: relative;
     display: flex; flex-direction: column; overflow: hidden;
     page-break-after: always; break-after: page;
   }
   .feuille:last-of-type { page-break-after: auto; break-after: auto; }
+  .feuille > * { position: relative; }
+  .fond { position: absolute; inset: 0; background: var(--fond); }
+
+  /* Mode quadri : format 226 × 313 mm = 210 × 297 + 3 mm de fond perdu + 5 mm de traits de coupe. */
+  body.quadri .feuille { width: 226mm; height: 313mm; padding: 19mm 21mm 16mm; }
+  body.quadri .fond { inset: 5mm; }
+  body.quadri .bat-marque { left: 21mm; right: 21mm; bottom: 2.5mm; }
+  .marques { position: absolute; inset: 0; width: 100%; height: 100%; }
 
   /* ---------- en-tête ---------- */
   .tete { border-bottom: 1.6pt solid var(--filet); padding-bottom: 3.4mm; margin-bottom: 4mm; }
-  .marque {
-    font-size: 7.4pt; letter-spacing: 3.4px; text-transform: uppercase;
-    color: var(--bronze); font-weight: 700;
+  .identite { display: flex; align-items: center; gap: 5mm; }
+  .logo {
+    flex: 0 0 auto; width: 19mm; height: 19mm; border-radius: 4mm;
+    border: 0.8pt solid var(--filet);
+  }
+  __LOGO__
+  .logo.petit { width: 14mm; height: 14mm; border-radius: 3mm; }
+  .titrage { flex: 1 1 auto; min-width: 0; }
+  .offre {
+    font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 10.5pt;
+    color: var(--bronze); line-height: 1.2;
   }
   h1 {
     font-family: Fraunces, Georgia, serif; font-weight: 700;
-    font-size: 27pt; line-height: 1.05; margin-top: 1.5mm; letter-spacing: -0.3px;
+    font-size: 25pt; line-height: 1.05; margin: 0.8mm 0 0.6mm; letter-spacing: -0.3px;
   }
-  .sous { display: flex; justify-content: space-between; align-items: baseline; margin-top: 2mm; gap: 6mm; }
-  .sous .rite { font-size: 10pt; color: var(--encre2); }
-  .sous .dates { font-size: 8.4pt; color: var(--encre2); text-align: right; line-height: 1.4; }
-  .sous .dates b { color: var(--encre); font-weight: 600; }
+  .rite { font-size: 9.6pt; color: var(--encre2); }
+  .dates { flex: 0 0 70mm; font-size: 8.4pt; color: var(--encre2); text-align: right; line-height: 1.4; }
+  .dates .annee {
+    display: block; font-family: Fraunces, Georgia, serif; font-size: 11pt;
+    color: var(--bronze); margin-bottom: 1mm;
+  }
+  .dates b { color: var(--encre); font-weight: 600; }
 
   /* ---------- bandeau d'ouverture ---------- */
   .ouverture {
@@ -152,25 +171,31 @@
   }
   @media screen and (prefers-color-scheme: dark) { body { background: #1E2743; } }
   body.bat .feuille { padding-bottom: 12mm; }
+  body.bat.quadri .feuille { padding-bottom: 20mm; }
 </style>
 
 <!-- ================== RECTO ================== -->
 <section class="feuille">
+  <div class="fond"></div>__MARQUES__
   <header class="tete">
-    <div class="marque">Moadim</div>
-    <h1>La feuille de miel</h1>
-    <div class="sous">
-      <div class="rite">Le seder des signes — <b>Roch Hachana 5787</b>, usage tunisien</div>
+    <div class="identite">
+      <div class="logo" role="img" aria-label="Moadim"></div>
+      <div class="titrage">
+        <div class="offre">Moadim vous offre cette feuille de miel</div>
+        <h1>La feuille de miel</h1>
+        <div class="rite">Le seder des signes — usage tunisien</div>
+      </div>
       <div class="dates">
-        Entrée de la fête <b>vendredi 11 septembre 2026</b> au soir<br>
-        1<sup>er</sup> Tichri : <b>samedi 12</b> · second jour : <b>dimanche 13</b>
+        <b class="annee">Roch Hachana 5787</b>
+        Entrée <b>vendredi 11 septembre 2026</b>, au soir<br>
+        1<sup>er</sup> jour <b>samedi 12</b> · 2<sup>e</sup> jour <b>dimanche 13</b>
       </div>
     </div>
   </header>
 
   <div class="ouverture">
     <div class="g">
-      <div class="titre">On ouvre une fois, puis on enchaîne signe après signe</div>
+      <div class="titre">L’ouverture — une seule fois</div>
       <div class="fr">« Qu’il soit Ta volonté, Éternel notre Dieu et Dieu de nos pères… »</div>
       <div class="ph">Yehi ratson milfanékha, Adonaï Elohénou vÉlohé avoténou…</div>
     </div>
@@ -271,7 +296,7 @@
     <div>Les fêtes, leurs horaires et leurs textes — dans la poche.</div>
     <div class="qr">
       __QR__
-      <div class="t"><b>get.moadim.app</b><br>Application iPhone gratuite</div>
+      <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
     </div>
   </footer>
   <div class="bat-marque"><span>BAT v1 — recto — 27.08.2026</span><span>Moadim · Roch Hachana 5787</span></div>
@@ -279,11 +304,15 @@
 
 <!-- ================== VERSO ================== -->
 <section class="feuille">
+  <div class="fond"></div>__MARQUES__
   <header class="tete">
-    <div class="marque">Moadim · la feuille de miel</div>
-    <h1>Autour de la table</h1>
-    <div class="sous">
-      <div class="rite">Les gestes qui entourent les signes, du vendredi soir au dimanche</div>
+    <div class="identite">
+      <div class="logo petit" role="img" aria-label="Moadim"></div>
+      <div class="titrage">
+        <div class="offre">La feuille de miel — verso</div>
+        <h1>Autour de la table</h1>
+        <div class="rite">Les gestes qui entourent les signes, du vendredi soir au dimanche</div>
+      </div>
       <div class="dates">Roch Hachana <b>5787</b><br>11 → 13 septembre 2026</div>
     </div>
   </header>
@@ -373,7 +402,7 @@
     <div>Horaires de la fête, textes en hébreu, phonétique et français,<br>bénédictions et gestes — pour chaque fête de l’année.</div>
     <div class="qr">
       __QR__
-      <div class="t"><b>get.moadim.app</b><br>Application iPhone gratuite</div>
+      <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
     </div>
   </footer>
   <div class="bat-marque"><span>BAT v1 — verso — 27.08.2026 — bon à tirer : date …………… signature ……………</span><span>A4 · recto-verso · reliure bord long</span></div>

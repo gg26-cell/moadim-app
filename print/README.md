@@ -1,40 +1,51 @@
 # La feuille de miel — Roch Hachana 5787
 
 Feuille A4 recto-verso à poser sur la table de Roch Hachana : le seder des signes
-(usage tunisien) au recto, les gestes qui l'entourent au verso.
+(usage tunisien) au recto, les gestes qui l'entourent au verso. Logo Moadim en
+couleur, QR vers la fiche App Store.
 
 ## Fichiers
 
 | Fichier | Rôle |
 | --- | --- |
 | `feuille-miel-simanim.src.html` | la source, seul fichier à modifier |
-| `build.py` | injecte les polices et le QR, écrit `dist/` |
-| `topdf.mjs` | rend les HTML de `dist/` en PDF A4 |
-| `dist/feuille-miel-simanim-BAT.pdf` | épreuve : repères de bon à tirer en bas de page |
-| `dist/feuille-miel-simanim.pdf` | version propre, sans repères, pour le tirage |
+| `assets/logo-moadim.jpg` | icône App Store, le logo posé en tête des deux pages |
+| `assets/logo-moadim-nuit.jpg` | variante étoile d'or sur nuit, non utilisée |
+| `build.py` | injecte polices, logo et QR ; écrit les HTML de `dist/` |
+| `topdf.mjs` | rend les HTML en PDF, chacun à son format de page |
+| `quadri.py` | passe le PDF quadri en CMJN et pose TrimBox / BleedBox |
+| `dist/…-bureau-A4.pdf` | A4 nu, RVB — pour l'imprimante de bureau |
+| `dist/…-quadri-BAT.pdf` | **le bon à tirer** — CMJN, fond perdu, traits de coupe |
 
 ## Refabriquer
 
 ```sh
-python3 -m pip install segno
+python3 -m pip install segno pillow pikepdf     # gs (ghostscript) doit être installé
 python3 print/build.py
-PLAYWRIGHT=/chemin/vers/playwright node print/topdf.mjs   # PLAYWRIGHT inutile si installé localement
+node print/topdf.mjs                            # PLAYWRIGHT=/chemin/playwright si install globale
+python3 print/quadri.py
 ```
 
 `build.py` produit aussi `dist/apercu-artifact.html` : le même document sans enveloppe
-`html/head/body`, prêt à être publié en Artifact pour relecture sur téléphone.
+`html/head/body`, prêt à publier en Artifact pour relecture à l'écran.
 
-## Spécifications d'impression
+## Le fichier pour l'imprimeur
 
-- **Format** : A4 (210 × 297 mm), 2 pages, recto-verso, reliure bord long.
-- **Marges** : 11 mm en tête, 13 mm sur les côtés, 8 mm en pied — aucun fond perdu,
-  la feuille s'imprime sur n'importe quelle imprimante de bureau.
-- **Couleurs** : palette « Parchemin » de la charte Moadim — fond `#FBF4E4`,
-  encre `#2C2417`, bronze `#7A4F0F`, filets `#A6863F`.
-- **Impression des fonds** : cocher « imprimer les arrière-plans » ; ils sont déjà
-  aplatis dans le PDF.
-- **Papier conseillé** : 120 g mat ivoire ou blanc cassé. Le fond crème du document
-  suffit à donner le grain du parchemin, inutile de payer un papier teinté.
+- **Format média** 226 × 313 mm = 210 × 297 rogné + 3 mm de fond perdu + 5 mm de
+  traits de coupe. `TrimBox` et `BleedBox` sont inscrites dans le PDF.
+- **Quadrichromie** : converti en CMJN par Ghostscript, aucun objet RVB résiduel.
+  Le brun du texte sort en 0/3/8/83 environ — dominante noire, pas un noir riche.
+- **Fond perdu** : l'aplat crème déborde de 3 mm au-delà du trait de coupe.
+- **Polices** incorporées et sous-ensemblées. **Images** : logo 480 × 480 px posé à
+  19 mm, soit ~640 dpi.
+- **Impression recto-verso**, reliure bord long.
+- **Papier conseillé** : 150 g mat ivoire pour une feuille, 250 g pour une carte de
+  table qui tient debout.
+
+## La version de bureau
+
+A4 strict, sans fond perdu ni traits de coupe, marges 11 / 13 / 8 mm : elle sort telle
+quelle sur n'importe quelle imprimante. Penser à cocher « imprimer les arrière-plans ».
 
 ## Contenu
 
@@ -50,6 +61,6 @@ nouveau du second soir, ce qu'on écarte de la table, les vœux et une liste à 
 
 ## Polices
 
-Embarquées en base64 dans le HTML pour que le document soit autonome. Toutes sous
-licence libre : Fraunces (OFL), Public Sans (OFL), Frank Ruhl Libre (OFL) pour l'hébreu
-vocalisé. Sous-ensembles latin et hébreu uniquement, téléchargés depuis Google Fonts.
+Embarquées en base64 pour que le document soit autonome. Toutes sous licence libre :
+Fraunces (OFL), Public Sans (OFL), Frank Ruhl Libre (OFL) pour l'hébreu vocalisé.
+Sous-ensembles latin et hébreu uniquement.

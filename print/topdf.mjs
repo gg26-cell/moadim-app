@@ -15,7 +15,7 @@ for (const fichier of pages) {
   await onglet.goto('file://' + path.join(dist, fichier), { waitUntil: 'networkidle' })
   await onglet.evaluate(() => document.fonts.ready)
   const sortie = path.join(dist, fichier.replace(/\.html$/, '.pdf'))
-  await onglet.pdf({ path: sortie, format: 'A4', printBackground: true, preferCSSPageSize: true })
+  await onglet.pdf({ path: sortie, printBackground: true, preferCSSPageSize: true })
   console.log(sortie)
 }
 await navigateur.close()
