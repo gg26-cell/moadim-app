@@ -9,8 +9,9 @@ couleur, QR vers la fiche App Store.
 | Fichier | Rôle |
 | --- | --- |
 | `feuille-miel-simanim.src.html` | la source, seul fichier à modifier |
-| `assets/logo-moadim.jpg` | icône App Store, le logo posé en tête des deux pages |
-| `assets/logo-moadim-nuit.jpg` | variante étoile d'or sur nuit, non utilisée |
+| `assets/logo-moadim.jpg` | étoile de pierre sur galaxie — le logo posé en tête des deux pages |
+| `assets/logo-moadim-icone-appstore.jpg` | variante : l'icône de l'App Store |
+| `assets/logo-moadim-nuit.jpg` | variante : étoile d'or sur fond de nuit |
 | `build.py` | injecte polices, logo et QR ; écrit les HTML de `dist/` |
 | `topdf.mjs` | rend les HTML en PDF, chacun à son format de page |
 | `quadri.py` | passe le PDF quadri en CMJN et pose TrimBox / BleedBox |
@@ -36,8 +37,8 @@ python3 print/quadri.py
 - **Quadrichromie** : converti en CMJN par Ghostscript, aucun objet RVB résiduel.
   Le brun du texte sort en 0/3/8/83 environ — dominante noire, pas un noir riche.
 - **Fond perdu** : l'aplat crème déborde de 3 mm au-delà du trait de coupe.
-- **Polices** incorporées et sous-ensemblées. **Images** : logo 480 × 480 px posé à
-  19 mm, soit ~640 dpi.
+- **Polices** incorporées et sous-ensemblées. **Images** : logo 720 × 720 px posé à
+  21 mm, soit ~870 dpi.
 - **Impression recto-verso**, reliure bord long.
 - **Papier conseillé** : 150 g mat ivoire pour une feuille, 250 g pour une carte de
   table qui tient debout.
