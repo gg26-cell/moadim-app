@@ -30,11 +30,12 @@ FACES = [
     ("Public Sans", "publicsans-latin.woff2", "400 700", None),
 ]
 
-# Géométrie du fichier quadri, en millimètres.
-MEDIA_L, MEDIA_H = 226, 313
+# Géométrie des fichiers quadri, en millimètres.
 ROGNE = 8          # du bord du média au trait de coupe
 FOND_PERDU = 3     # débord de l'aplat au-delà du trait de coupe
 TRAIT = 5          # longueur des traits de coupe
+MEDIA_L, MEDIA_H = 210 + 2 * ROGNE, 297 + 2 * ROGNE          # page A4 seule
+PLI_L, PLI_H = 420 + 2 * ROGNE, 297 + 2 * ROGNE              # feuille A3 à plier
 
 
 def font_faces() -> str:
@@ -68,24 +69,46 @@ def qr_svg() -> str:
     return re.sub(r'\s(width|height)="[^"]*"', "", svg, count=2)
 
 
-def traits_de_coupe() -> str:
-    """Huit traits aux quatre coins, arrêtés à la limite du fond perdu."""
-    g, d = ROGNE, MEDIA_L - ROGNE          # traits verticaux (x)
-    h, b = ROGNE, MEDIA_H - ROGNE          # traits horizontaux (y)
-    fin = ROGNE - FOND_PERDU               # les traits s'arrêtent avant l'aplat
+def traits_de_coupe(largeur: int = None, hauteur: int = None, pliage: bool = False) -> str:
+    """Traits aux quatre coins, arrêtés à la limite du fond perdu.
+
+    En mode pliage, deux traits supplémentaires marquent l'axe du pli.
+    """
+    largeur = largeur or MEDIA_L
+    hauteur = hauteur or MEDIA_H
+    assert ROGNE - FOND_PERDU >= 0, "les traits mordraient sur le fond perdu"
     lignes = []
-    for x in (g, d):
-        lignes.append((x, 0, x, TRAIT))
-        lignes.append((x, MEDIA_H - TRAIT, x, MEDIA_H))
-    for y in (h, b):
-        lignes.append((0, y, TRAIT, y))
-        lignes.append((MEDIA_L - TRAIT, y, MEDIA_L, y))
-    assert fin >= 0
+    for x in (ROGNE, largeur - ROGNE):
+        lignes += [(x, 0, x, TRAIT), (x, hauteur - TRAIT, x, hauteur)]
+    for y in (ROGNE, hauteur - ROGNE):
+        lignes += [(0, y, TRAIT, y), (largeur - TRAIT, y, largeur, y)]
+    if pliage:
+        milieu = largeur / 2
+        lignes += [(milieu, 0, milieu, TRAIT), (milieu, hauteur - TRAIT, milieu, hauteur)]
     traits = "".join(
         f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}"/>' for x1, y1, x2, y2 in lignes
     )
-    return (f'<svg class="marques" viewBox="0 0 {MEDIA_L} {MEDIA_H}" aria-hidden="true">'
+    return (f'<svg class="marques" viewBox="0 0 {largeur} {hauteur}" aria-hidden="true">'
             f'<g stroke="#000" stroke-width="0.12">{traits}</g></svg>')
+
+
+def imposer(corps: str, marques: str) -> str:
+    """Range les quatre pages sur deux feuilles A3 : dos-couverture, puis intérieur.
+
+    Pliée en deux, la feuille donne 1 en couverture, 2-3 en double page, 4 au dos.
+    """
+    ouvre = '<section class="feuille'
+    morceaux = corps.split(ouvre)
+    entete, pages = morceaux[0], [ouvre + m for m in morceaux[1:]]
+    assert len(pages) == 4, f"quatre pages attendues, {len(pages)} trouvées"
+    slug = ('<div class="slug-pli"><span>Moadim · la feuille de miel 5787 — {face}</span>'
+            '<span>A3 · recto-verso · pli au centre · fond perdu 3 mm</span></div>')
+    feuilles = []
+    for face, (gauche, droite) in (("extérieur : dos et couverture", (pages[3], pages[0])),
+                                   ("intérieur : double page", (pages[1], pages[2]))):
+        feuilles.append(f'<div class="pli"><div class="fond-pli"></div>{marques}'
+                        f'{gauche}{droite}{slug.format(face=face)}</div>')
+    return entete + "".join(feuilles)
 
 
 def sans_kiddouch(gabarit: str) -> str:
@@ -112,21 +135,25 @@ def main() -> None:
               .replace("__LOGO__", logo_css(LOGO)))
     DIST.mkdir(exist_ok=True)
 
-    versions = {"complete": commun.replace("<!--C-->", "").replace("<!--/C-->", ""),
-                "courte": sans_kiddouch(commun)}
-    formats = [
-        ("A4", "A4", "", ""),
-        ("quadri", f"{MEDIA_L}mm {MEDIA_H}mm", traits_de_coupe(), ' class="bat quadri"'),
+    complete = commun.replace("<!--C-->", "").replace("<!--/C-->", "")
+    sorties = [
+        # nom,                     gabarit,   format de page,               marques,                                  classes,                 imposition
+        ("complete-A4", complete, "A4", "", "", False),
+        ("courte-A4", sans_kiddouch(commun), "A4", "", "", False),
+        ("pliage-A3", complete, "420mm 297mm", "", ' class="pliage"', True),
+        ("pliage-quadri", complete, f"{PLI_L}mm {PLI_H}mm",
+         traits_de_coupe(PLI_L, PLI_H, pliage=True), ' class="bat pliage quadri"', True),
     ]
-    for version, texte in versions.items():
-        for suffixe, page, marques, classe in formats:
-            corps = texte.replace("__PAGE__", page).replace("__MARQUES__", marques)
-            tete, reste = corps.split("</style>", 1)
-            ecrire(DIST / f"feuille-miel-5787-{version}-{suffixe}.html",
-                   f'<!doctype html>\n<html lang="fr"><head>{tete}</style></head>'
-                   f"<body{classe}>{reste}</body></html>")
+    for nom, gabarit, page, marques, classe, imposition in sorties:
+        corps = gabarit.replace("__PAGE__", page)
+        corps = imposer(corps, marques) if imposition else corps.replace("__MARQUES__", marques)
+        corps = corps.replace("__MARQUES__", "")
+        tete, reste = corps.split("</style>", 1)
+        ecrire(DIST / f"feuille-miel-5787-{nom}.html",
+               f'<!doctype html>\n<html lang="fr"><head>{tete}</style></head>'
+               f"<body{classe}>{reste}</body></html>")
 
-    apercu = versions["complete"].replace("__PAGE__", "A4").replace("__MARQUES__", "")
+    apercu = complete.replace("__PAGE__", "A4").replace("__MARQUES__", "")
     ecrire(DIST / "apercu-artifact.html", apercu)
 
 

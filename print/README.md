@@ -1,10 +1,12 @@
 # La feuille de miel — Roch Hachana 5787
 
-Feuille à poser sur la table de Roch Hachana. Deux versions :
+Feuille à poser sur la table de Roch Hachana. Quatre pages — les signes, le Kiddouch
+du premier soir, le Kiddouch du second soir, les gestes autour de la table — tenant sur
+**une seule feuille A3 imprimée recto-verso et pliée en deux**.
 
-- **complète**, 4 pages — les signes, le Kiddouch du premier soir, le Kiddouch du
-  second soir, les gestes autour de la table ;
-- **courte**, 2 pages recto-verso — les signes et les gestes, sans le Kiddouch.
+Le fichier destiné à l'imprimeur est déjà imposé : chacune de ses deux pages est une
+face de la feuille. Extérieur : page 4 à gauche, page 1 à droite. Intérieur : pages 2
+et 3. Une fois pliée, la feuille se lit dans l'ordre.
 
 Logo Moadim en couleur, QR vers la fiche App Store.
 
@@ -19,10 +21,10 @@ Logo Moadim en couleur, QR vers la fiche App Store.
 | `build.py` | injecte polices, logo et QR ; écrit les HTML de `dist/` |
 | `topdf.mjs` | rend les HTML en PDF, chacun à son format de page |
 | `quadri.py` | passe le PDF quadri en CMJN et pose TrimBox / BleedBox |
-| `dist/…-complete-A4.pdf` | 4 pages A4 nues, RVB — imprimante de bureau |
-| `dist/…-complete-quadri-BAT.pdf` | **le bon à tirer complet** — CMJN, fond perdu, traits de coupe |
-| `dist/…-courte-A4.pdf` | la version 2 pages, même traitement |
-| `dist/…-courte-quadri-BAT.pdf` | son bon à tirer |
+| `dist/…-pliage-quadri-BAT.pdf` | **le bon à tirer** — feuille A3 imposée, CMJN, fond perdu, traits de coupe et de pliage |
+| `dist/…-pliage-A3.pdf` | la même feuille imposée, sans repères — tirage A3 de bureau |
+| `dist/…-complete-A4.pdf` | les 4 pages séparées, une par page A4 — dépannage à la maison |
+| `dist/…-courte-A4.pdf` | la version 2 pages sans le Kiddouch |
 
 ## Refabriquer
 
@@ -38,16 +40,19 @@ python3 print/quadri.py
 
 ## Le fichier pour l'imprimeur
 
-- **Format média** 226 × 313 mm = 210 × 297 rogné + 3 mm de fond perdu + 5 mm de
-  traits de coupe. `TrimBox` et `BleedBox` sont inscrites dans le PDF.
+- **Format média** 436 × 313 mm = A3 (420 × 297) rogné + 3 mm de fond perdu + 5 mm de
+  traits de coupe. `TrimBox` et `BleedBox` sont inscrites dans le PDF, déduites du
+  format réel de chaque page — le même code sert aux fichiers A4.
+- **Deux traits de pliage** marquent l'axe central, en haut et en bas, hors du format
+  fini.
 - **Quadrichromie** : converti en CMJN par Ghostscript, aucun objet RVB résiduel.
   Le brun du texte sort en 0/3/8/83 environ — dominante noire, pas un noir riche.
 - **Fond perdu** : l'aplat crème déborde de 3 mm au-delà du trait de coupe.
 - **Polices** incorporées et sous-ensemblées. **Images** : logo 720 × 720 px posé à
   21 mm, soit ~870 dpi.
-- **Imposition** : les pages sont livrées **dans l'ordre de lecture**, une par page.
-  L'imprimeur impose lui-même s'il tire la version complète en A3 plié. La version
-  courte s'imprime en recto-verso, reliure bord long.
+- **Imposition** : déjà faite dans le fichier de pliage. Impression **recto-verso,
+  retournement bord long**, puis un pli au centre. Ne pas laisser l'imprimeur imposer
+  une seconde fois.
 - **Papier conseillé** : 150 g mat ivoire pour une feuille, 250 g pour une carte de
   table qui tient debout.
 

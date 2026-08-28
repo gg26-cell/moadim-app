@@ -37,6 +37,27 @@
   body.quadri .bat-marque { left: 21mm; right: 21mm; bottom: 2.5mm; }
   .marques { position: absolute; inset: 0; width: 100%; height: 100%; }
 
+  /* Mode pliage : une feuille A3 à l'italienne porte deux pages A4 côte à côte.
+     Pliée en deux, elle donne les quatre pages dans l'ordre de lecture. */
+  .pli { display: flex; position: relative; background: #fff; page-break-after: always; break-after: page; }
+  .pli:last-of-type { page-break-after: auto; break-after: auto; }
+  .fond-pli { position: absolute; inset: 0; background: var(--fond); }
+  body.pliage .feuille {
+    width: 210mm; height: 297mm; padding: 11mm 13mm 8mm;
+    page-break-after: auto; break-after: auto;
+  }
+  body.pliage .fond { inset: 0; }
+  body.pliage .bat-marque { display: none; }
+  body.pliage .pli { width: 420mm; height: 297mm; }
+  body.pliage.quadri .pli { width: 436mm; height: 313mm; padding: 8mm; }
+  body.pliage.quadri .fond-pli { inset: 5mm; }
+  .slug-pli {
+    display: none; position: absolute; left: 8mm; right: 8mm; bottom: 2.5mm;
+    font-size: 6.6pt; letter-spacing: 0.4px; color: var(--filet);
+    justify-content: space-between;
+  }
+  body.pliage.quadri .slug-pli { display: flex; }
+
   /* ---------- en-tête ---------- */
   .tete { border-bottom: 1.6pt solid var(--filet); padding-bottom: 3.4mm; margin-bottom: 4mm; }
   .identite { display: flex; align-items: center; gap: 5mm; }
@@ -377,7 +398,7 @@
 
     <section class="encadre">
       <div class="etiquette">Puis</div>
-      <p>On boit la coupe, on se lave les mains, on dit <b>Hamotsi</b> — et le pain se trempe dans le miel. Le seder des signes vient ensuite : il est au recto de cette feuille.</p>
+      <p>On boit la coupe, on se lave les mains, on dit <b>Hamotsi</b> — et le pain se trempe dans le miel. Le seder des signes vient ensuite : il est en première page.</p>
     </section>
 
   </div>
@@ -470,7 +491,7 @@
     <div class="identite">
       <div class="logo petit" role="img" aria-label="Moadim"></div>
       <div class="titrage">
-        <div class="offre">La feuille de miel — verso</div>
+        <div class="offre">La feuille de miel — les gestes</div>
         <h1>Autour de la table</h1>
         <div class="rite">Les gestes qui entourent les signes, du vendredi soir au dimanche</div>
       </div>

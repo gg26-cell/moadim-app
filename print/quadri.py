@@ -17,12 +17,17 @@ DIST = ICI / "dist"
 
 MM = 72 / 25.4
 ROGNE, FOND_PERDU = 8, 3          # mm, cf. build.py
-MEDIA_L, MEDIA_H = 226, 313       # mm
 
 
-def boite(marge: float) -> list[float]:
-    return [round(v * MM, 4) for v in
-            (marge, marge, MEDIA_L - marge, MEDIA_H - marge)]
+def boite(page: pikepdf.Page, marge: float) -> list[float]:
+    """Rectangle inscrit à `marge` millimètres du bord du média de cette page.
+
+    Les boîtes se déduisent du format réel : le même code sert à la page A4
+    seule (226 × 313) et à la feuille A3 à plier (436 × 313).
+    """
+    x0, y0, x1, y1 = (float(v) for v in page.MediaBox)
+    d = marge * MM
+    return [round(v, 4) for v in (x0 + d, y0 + d, x1 - d, y1 - d)]
 
 
 def convertir(source: pathlib.Path) -> None:
@@ -40,8 +45,8 @@ def convertir(source: pathlib.Path) -> None:
     )
     with pikepdf.open(intermediaire) as pdf:
         for page in pdf.pages:
-            page.TrimBox = boite(ROGNE)
-            page.BleedBox = boite(ROGNE - FOND_PERDU)
+            page.TrimBox = boite(page, ROGNE)
+            page.BleedBox = boite(page, ROGNE - FOND_PERDU)
         pdf.save(cible, linearize=True)
     intermediaire.unlink()
     source.unlink()
