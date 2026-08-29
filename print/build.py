@@ -166,6 +166,8 @@ def main() -> None:
         ("veoprint-A4-dense-quadri", dense, "214mm 301mm", "", ' class="veo"', False),
         ("veoprint-A3-quadri", complete, "424mm 301mm", "", ' class="veo pliage"', True),
         ("veoprint-A3-gros-quadri", complete, "424mm 301mm", "", ' class="veo pliage gros"', True),
+        # Certains imprimeurs veulent les pages une par une plutôt que la feuille imposée.
+        ("veoprint-4pages-gros-quadri", complete, "214mm 301mm", "", ' class="veo gros"', False),
     ]
     for nom, gabarit, page, marques, classe, imposition in sorties:
         corps = gabarit.replace("__PAGE__", page)
