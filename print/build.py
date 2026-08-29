@@ -111,6 +111,14 @@ def imposer(corps: str, marques: str) -> str:
     return entete + "".join(feuilles)
 
 
+def retirer(gabarit: str, balise: str) -> str:
+    """Retire la section délimitée par <!--balise--> … <!--/balise-->."""
+    while f"<!--{balise}-->" in gabarit:
+        avant, suite = gabarit.split(f"<!--{balise}-->", 1)
+        gabarit = avant + suite.split(f"<!--/{balise}-->", 1)[1]
+    return gabarit
+
+
 def sans_kiddouch(gabarit: str) -> str:
     """Retire les deux pages de Kiddouch : il reste les signes et le verso."""
     debut, reste = gabarit.split("<!--KIDDOUCH-->", 1)
@@ -135,16 +143,23 @@ def main() -> None:
               .replace("__LOGO__", logo_css(LOGO)))
     DIST.mkdir(exist_ok=True)
 
-    complete = commun.replace("<!--C-->", "").replace("<!--/C-->", "")
+    commun = retirer(commun, "VERSO-COMPACT") if False else commun
+    # Trois montages à partir du même gabarit.
+    complete = retirer(commun.replace("<!--C-->", "").replace("<!--/C-->", ""), "VERSO-COMPACT")
+    courte = retirer(sans_kiddouch(commun), "VERSO-COMPACT")
+    # Version « tout sur une A4 » : les signes, puis le verso condensé à la place du verso normal.
+    dense = retirer(retirer(sans_kiddouch(commun), "VERSO"), "C")
     sorties = [
         # nom,                     gabarit,   format de page,               marques,                                  classes,                 imposition
         ("complete-A4", complete, "A4", "", "", False),
-        ("courte-A4", sans_kiddouch(commun), "A4", "", "", False),
+        ("courte-A4", courte, "A4", "", "", False),
+        ("dense-A4", dense, "A4", "", "", False),
         ("pliage-A3", complete, "420mm 297mm", "", ' class="pliage"', True),
         ("pliage-quadri", complete, f"{PLI_L}mm {PLI_H}mm",
          traits_de_coupe(PLI_L, PLI_H, pliage=True), ' class="bat pliage quadri"', True),
         # Fichiers à la norme de l'imprimeur en ligne : + 4 mm, sans repères.
-        ("veoprint-A4-quadri", sans_kiddouch(commun), "214mm 301mm", "", ' class="veo"', False),
+        ("veoprint-A4-quadri", courte, "214mm 301mm", "", ' class="veo"', False),
+        ("veoprint-A4-dense-quadri", dense, "214mm 301mm", "", ' class="veo"', False),
         ("veoprint-A3-quadri", complete, "424mm 301mm", "", ' class="veo pliage"', True),
     ]
     for nom, gabarit, page, marques, classe, imposition in sorties:

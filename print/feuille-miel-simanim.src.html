@@ -195,6 +195,20 @@
   .encadre p { font-size: 8.6pt; line-height: 1.4; }
   .encadre p + p { margin-top: 1.6mm; }
 
+  /* ---------- verso condensé ---------- */
+  .compact .he { font-size: 10.2pt; line-height: 1.5; text-align: right; margin-top: 1.4mm; }
+  .compact .ph { font-size: 7pt; font-style: italic; color: var(--encre2); line-height: 1.32; margin-top: 1mm; }
+  .compact .didasc { font-size: 7.4pt; font-style: italic; color: var(--encre2); }
+  .compact .bloc p { font-size: 8.4pt; line-height: 1.4; }
+  .compact .bloc h2 { font-size: 11.5pt; margin-bottom: 1.6mm; }
+  .compact .bloc { margin-bottom: 3.4mm; }
+  .compact .alerte p { font-size: 8.4pt; }
+  .compact .ins { color: var(--bronze); }
+  .compact .mention { font-size: 7.2pt; font-style: italic; color: var(--encre2); line-height: 1.35; }
+  .compact .colonnes { gap: 6mm; }
+  .compact h1 { font-size: 21pt; }
+  .compact .cases li { font-size: 8.2pt; }
+
   /* ---------- pied ---------- */
   .pied {
     margin-top: 3mm; padding-top: 2.4mm; border-top: 1pt solid var(--filet);
@@ -494,6 +508,7 @@
 </section>
 <!--/KIDDOUCH-->
 
+<!--VERSO-->
 <!-- ================== AUTOUR DE LA TABLE ================== -->
 <section class="feuille">
   <div class="fond"></div>__MARQUES__
@@ -609,3 +624,111 @@
   ajusterEchelle()
   addEventListener('resize', ajusterEchelle)
 </script>
+
+<!--/VERSO-->
+<!--VERSO-COMPACT-->
+<!-- ============ VERSO CONDENSÉ : le Kiddouch tient, au prix du reste ============ -->
+<section class="feuille compact">
+  <div class="fond"></div>__MARQUES__
+  <header class="tete">
+    <div class="identite">
+      <div class="logo petit" role="img" aria-label="Moadim"></div>
+      <div class="titrage">
+        <div class="offre">La feuille de miel — verso</div>
+        <h1>Le Kiddouch et la table</h1>
+        <div class="rite">Ce qui se dit, ce qui se fait</div>
+      </div>
+      <div class="dates">Roch Hachana <b>5787</b><br>11 → 13 septembre 2026</div>
+    </div>
+  </header>
+
+  <div class="colonnes">
+   <div class="col">
+
+    <section class="bloc">
+      <h2>Le Kiddouch</h2>
+      <p class="didasc">Le vendredi soir, on commence par <b>Vayekhoulou</b>. Ce qui est <span class="ins">entre parenthèses</span> ne se dit que ce soir-là.</p>
+      <p class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא פְּרִי הַגֶּפֶן׃</p>
+      <p class="ph">Savri maranan. — Baroukh ata Adonaï, Elohénou mélekh haolam, boré peri haguéfen.</p>
+      <p class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, אֲשֶׁר בָּחַר בָּנוּ מִכָּל עָם וְרוֹמְמָנוּ מִכָּל לָשׁוֹן וְקִדְּשָׁנוּ בְּמִצְוֹתָיו. וַתִּתֶּן לָנוּ יְיָ אֱלֹהֵינוּ בְּאַהֲבָה <span class="ins">(שַׁבָּתוֹת לִמְנוּחָה וּ)</span>מוֹעֲדִים לְשִׂמְחָה, חַגִּים וּזְמַנִּים לְשָׂשׂוֹן, <span class="ins">(אֶת יוֹם הַשַּׁבָּת הַזֶּה וְ)</span>אֶת יוֹם הַזִּכָּרוֹן הַזֶּה, יוֹם <span class="ins">(זִכְרוֹן)</span> תְּרוּעָה <span class="ins">(בְּאַהֲבָה)</span> מִקְרָא קֹדֶשׁ זֵכֶר לִיצִיאַת מִצְרָיִם. כִּי בָנוּ בָחַרְתָּ וְאוֹתָנוּ קִדַּשְׁתָּ מִכָּל הָעַמִּים, <span class="ins">(וְשַׁבָּת)</span> וּמוֹעֲדֵי קָדְשֶׁךָ <span class="ins">(בְּאַהֲבָה וּבְרָצוֹן)</span> בְּשִׂמְחָה וּבְשָׂשׂוֹן הִנְחַלְתָּנוּ. בָּרוּךְ אַתָּה יְיָ, מֶלֶךְ עַל כָּל הָאָרֶץ, מְקַדֵּשׁ <span class="ins">(הַשַּׁבָּת וְ)</span>יִשְׂרָאֵל וְיוֹם הַזִּכָּרוֹן׃</p>
+      <p class="ph">…acher bahar banou mikol am veromemanou mikol lachon vekidchanou bemitsvotav. Vatiten lanou Adonaï Elohénou beahava <span class="ins">(chabbatot limnouha ou)</span>moadim lessimha, haguim ouzmanim lessasson, <span class="ins">(et yom haChabbat hazé vé)</span>et yom hazikaron hazé, yom <span class="ins">(zikhron)</span> teroua <span class="ins">(beahava)</span> mikra kodech zekher litsiat Mitsrayim. Ki vanou vaharta veotanou kidachta mikol haamim, <span class="ins">(vechabbat)</span> oumoadei kodchekha <span class="ins">(beahava ouvratson)</span> bessimha ouvsasson hinhaltanou. Baroukh ata Adonaï, mélekh al kol haarets, mekadech <span class="ins">(haChabbat vé)</span>Israël veyom hazikaron.</p>
+      <p class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה׃</p>
+      <p class="ph">Baroukh ata Adonaï… chéhé’héyanou vekiyemanou vehiguianou lazman hazé.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Le second soir — la Havdala</h2>
+      <p class="didasc">Samedi soir seulement, après le Kiddouch, en regardant ses ongles à la lumière des bougies.</p>
+      <p class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא מְאוֹרֵי הָאֵשׁ׃ בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, הַמַּבְדִּיל בֵּין קֹדֶשׁ לְקֹדֶשׁ׃</p>
+      <p class="ph">…boré meoré haech. …hamavdil ben kodech lekodech. Puis Chéhé’héyanou sur un fruit nouveau.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Ce que dit le Kiddouch</h2>
+      <p>Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as choisis d’entre tous les peuples et nous as donné, avec amour, <span class="ins">(ce jour de Chabbat et)</span> ce jour du Souvenir, jour <span class="ins">(du mémorial)</span> de la sonnerie, sainte convocation, en souvenir de la sortie d’Égypte. Béni sois-Tu, Éternel, Roi de toute la terre, qui sanctifies <span class="ins">(le Chabbat,)</span> Israël et le jour du Souvenir.</p>
+    </section>
+
+   </div>
+   <div class="col">
+
+    <section class="bloc">
+      <h2>Avant les signes</h2>
+      <p><b>Allumage</b> vendredi 11 septembre avant l’entrée de la fête : <i>…lehadlik ner chel Chabbat vechel Yom Tov</i>, puis Chéhé’héyanou.</p>
+      <p>Kiddouch, lavage des mains, <b>Hamotsi</b> — et <b>le pain se trempe dans le miel</b>, non dans le sel, jusqu’à Hocha’na Rabba.</p>
+      <p>Le seder des signes se dit juste après le kiddouch ou une fois le pain entamé, selon l’usage de la famille.</p>
+    </section>
+
+    <section class="bloc alerte">
+      <h2>Le shofar — particularité de 5787</h2>
+      <p>Le 1<sup>er</sup> Tichri tombe <b>un samedi</b> : on ne sonne pas le shofar le premier jour. Les sonneries sont reportées au <b>second jour, dimanche 13 septembre</b> — le <b>Tachlikh</b> aussi.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Ce qu’on écarte</h2>
+      <p>Rien d’amer, rien d’acide, pas de vinaigre : la table dit la douceur qu’on demande. Et l’usage répandu d’écarter les <b>noix</b>.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Les vœux</h2>
+      <p><b>Tizkou léchanim rabbot</b> — on répond <i>néimot vetovot</i>. Et le plus simple, celui que le miel dit à votre place : <b>chana tova oumtouka</b>.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>Les cent sonneries</h2>
+      <p>Trois sons dans le même ordre : la <b>tekia</b>, longue et pleine ; les <b>chevarim</b>, trois sons brisés ; la <b>teroua</b>, une rafale de sons courts. Cent au cours de l’office.</p>
+    </section>
+
+    <section class="bloc">
+      <h2>À prévoir sur la table</h2>
+      <ul class="cases">
+        <li>Des dattes</li>
+        <li>Une pomme</li>
+        <li>Du miel</li>
+        <li>Une grenade</li>
+        <li>De la loubia</li>
+        <li>De la courge</li>
+        <li>Du poireau</li>
+        <li>Des blettes</li>
+        <li>Une tête d’agneau<br>ou de poisson</li>
+        <li>Un pain rond</li>
+        <li>Un fruit nouveau</li>
+        <li>Bougies et vin</li>
+      </ul>
+    </section>
+
+    <p class="mention">L’ordre et les formules suivent l’usage courant en Tunisie ; d’une famille à l’autre, la grenade et la pomme s’échangent. Gardez l’usage de votre maison.</p>
+
+   </div>
+  </div>
+
+  <footer class="pied">
+    <div class="sig">Moadim</div>
+    <div>Le Kiddouch en entier, les textes de chaque fête,<br>les horaires — dans l’application.</div>
+    <div class="qr">
+      __QR__
+      <div class="t"><b>Télécharger Moadim</b><br>App Store · gratuit sur iPhone</div>
+    </div>
+  </footer>
+  <div class="bat-marque"><span>BAT v3 — verso condensé, avec Kiddouch</span><span>Moadim · Roch Hachana 5787</span></div>
+</section>
+<!--/VERSO-COMPACT-->
