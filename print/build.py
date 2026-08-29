@@ -154,13 +154,18 @@ def main() -> None:
         ("complete-A4", complete, "A4", "", "", False),
         ("courte-A4", courte, "A4", "", "", False),
         ("dense-A4", dense, "A4", "", "", False),
+        ("gros-dense-A4", dense, "A4", "", ' class="gros"', False),
         ("pliage-A3", complete, "420mm 297mm", "", ' class="pliage"', True),
+        ("gros-pliage-A3", complete, "420mm 297mm", "", ' class="pliage gros"', True),
+        ("gros-pliage-quadri", complete, f"{PLI_L}mm {PLI_H}mm",
+         traits_de_coupe(PLI_L, PLI_H, pliage=True), ' class="bat pliage quadri gros"', True),
         ("pliage-quadri", complete, f"{PLI_L}mm {PLI_H}mm",
          traits_de_coupe(PLI_L, PLI_H, pliage=True), ' class="bat pliage quadri"', True),
         # Fichiers à la norme de l'imprimeur en ligne : + 4 mm, sans repères.
         ("veoprint-A4-quadri", courte, "214mm 301mm", "", ' class="veo"', False),
         ("veoprint-A4-dense-quadri", dense, "214mm 301mm", "", ' class="veo"', False),
         ("veoprint-A3-quadri", complete, "424mm 301mm", "", ' class="veo pliage"', True),
+        ("veoprint-A3-gros-quadri", complete, "424mm 301mm", "", ' class="veo pliage gros"', True),
     ]
     for nom, gabarit, page, marques, classe, imposition in sorties:
         corps = gabarit.replace("__PAGE__", page)
