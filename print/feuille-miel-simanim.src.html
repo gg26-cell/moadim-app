@@ -212,24 +212,24 @@
   /* ---------- gros caractères ----------
      On grossit d'abord ce qui se récite : l'hébreu et sa phonétique. Le reste
      suit, mais moins, pour ne pas faire exploser la pagination. */
-  body.gros .ouverture .he { font-size: 15.5pt; line-height: 1.6; }
+  body.gros .ouverture .he { font-size: 17pt; line-height: 1.6; }
   body.gros .ouverture .fr { font-size: 10.6pt; }
   body.gros .ouverture .ph { font-size: 9.2pt; }
   body.gros .nom .fr { font-size: 13.5pt; }
   body.gros .nom .hb { font-size: 13pt; }
-  body.gros .signe .he { font-size: 16pt; line-height: 1.55; }
+  body.gros .signe .he { font-size: 18pt; line-height: 1.55; }
   body.gros .signe .ph { font-size: 9.4pt; line-height: 1.4; }
   body.gros .signe .tr { font-size: 10.8pt; }
   body.gros .signe .note { font-size: 8.6pt; }
   body.gros .brk { font-size: 8pt; }
-  body.gros .priere .he { font-size: 14.5pt; line-height: 1.62; }
+  body.gros .priere .he { font-size: 16.5pt; line-height: 1.55; }
   body.gros .priere .ph { font-size: 9.4pt; line-height: 1.45; }
   body.gros .priere .fr { font-size: 10.4pt; line-height: 1.45; }
   body.gros .mouvement .etiquette { font-size: 8pt; }
   body.gros .mouvement .didascalie { font-size: 9pt; }
   body.gros .bloc h2 { font-size: 14pt; }
   body.gros .bloc p, body.gros .liste li { font-size: 10.6pt; line-height: 1.5; }
-  body.gros .bloc .he { font-size: 14.5pt; }
+  body.gros .bloc .he { font-size: 16pt; }
   body.gros .bloc .ph { font-size: 9.4pt; }
   body.gros .cases li { font-size: 10.4pt; }
   body.gros .encadre p { font-size: 10.2pt; }
@@ -241,7 +241,7 @@
   body.gros .vayekhoulou, body.gros .sonneries,
   body.gros .priere .encadre, body.gros .priere .fr { display: none; }
   body.gros .priere .fr-court {
-    display: block; font-size: 10.2pt; line-height: 1.45; margin-top: 1.6mm;
+    display: block; font-size: 10.2pt; line-height: 1.42; margin-top: 1mm;
   }
   body.gros .signe .note { display: none; }
   /* On récupère des millimètres là où ils ne coûtent rien à la lecture. */
@@ -264,6 +264,15 @@
   body.gros .bloc h2 { padding-bottom: 1mm; margin-bottom: 1.8mm; }
   body.gros .cases { gap: 1.2mm 4mm; }
   body.gros .cases li { font-size: 9.8pt; }
+  /* L'hébreu a gagné des points, on les reprend sur les interlignes et le
+     français, jamais sur la phonétique — elle se lit à voix haute elle aussi. */
+  body.gros .priere { gap: 1.8mm; }
+  body.gros .mouvement + .mouvement { padding-top: 1.8mm; }
+  body.gros .priere .fr-court { font-size: 9.6pt; }
+  body.gros .signe .tr { font-size: 9.6pt; }
+  body.gros .signes { gap: 1.6mm 5mm; }
+  body.gros .mouvement .etiquette { margin-bottom: 0.7mm; }
+  body.gros .mouvement .didascalie { font-size: 8.6pt; margin-bottom: 0.6mm; }
   body.gros .note-rite p:not(.fr-court) { display: none; }
   body.gros .note-rite .fr-court { display: block; font-size: 10pt; }
 
@@ -535,7 +544,7 @@
 
     <section class="mouvement">
       <div class="etiquette">La Havdala</div>
-      <div class="didascalie">On regarde ses ongles à la lumière des bougies de la fête.</div>
+      <div class="didascalie">On regarde ses ongles à la lumière des bougies.</div>
       <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, בּוֹרֵא מְאוֹרֵי הָאֵשׁ׃ בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, הַמַּבְדִּיל בֵּין קֹדֶשׁ לְחֹל, בֵּין אוֹר לְחֹשֶׁךְ, בֵּין יִשְׂרָאֵל לָעַמִּים, בֵּין יוֹם הַשְּׁבִיעִי לְשֵׁשֶׁת יְמֵי הַמַּעֲשֶׂה. בֵּין קְדֻשַּׁת שַׁבָּת לִקְדֻשַּׁת יוֹם טוֹב הִבְדַּלְתָּ, וְאֶת יוֹם הַשְּׁבִיעִי מִשֵּׁשֶׁת יְמֵי הַמַּעֲשֶׂה קִדַּשְׁתָּ. הִבְדַּלְתָּ וְקִדַּשְׁתָּ אֶת עַמְּךָ יִשְׂרָאֵל בִּקְדֻשָּׁתֶךָ. בָּרוּךְ אַתָּה יְיָ, הַמַּבְדִּיל בֵּין קֹדֶשׁ לְקֹדֶשׁ׃</div>
       <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, boré meoré haech. Baroukh ata Adonaï, Elohénou mélekh haolam, hamavdil ben kodech lehol, ben or lehochekh, ben Israël laamim, ben yom hachevii lecheche yemé hamaassé. Ben kedouchat Chabbat likdouchat yom tov hivdalta, veet yom hachevii michéchet yemé hamaassé kidachta. Hivdalta vekidachta et amekha Israël bikdouchatekha. Baroukh ata Adonaï, hamavdil ben kodech lekodech.</div>
       <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui crées les lumières du feu. Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui sépares le sacré du profane, la lumière des ténèbres, Israël des nations, le septième jour des six jours de l’œuvre. Tu as distingué la sainteté du Chabbat de la sainteté du jour de fête, et Tu as sanctifié le septième jour au-dessus des six jours de l’œuvre. Tu as distingué et sanctifié ton peuple Israël par ta sainteté. Béni sois-Tu, Éternel, qui sépares le sacré du sacré.</div>
@@ -544,7 +553,7 @@
 
     <section class="mouvement">
       <div class="etiquette">Chéhé’héyanou</div>
-      <div class="didascalie">On pose le regard sur le fruit nouveau avant de dire la bénédiction.</div>
+      <div class="didascalie">Sur le fruit nouveau.</div>
       <div class="he">בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה׃</div>
       <div class="ph">Baroukh ata Adonaï, Elohénou mélekh haolam, chéhé’héyanou vekiyemanou vehiguianou lazman hazé.</div>
       <div class="fr">Béni sois-Tu, Éternel notre Dieu, Roi de l’univers, qui nous as fait vivre, nous as maintenus et nous as fait parvenir à cette époque.</div>
