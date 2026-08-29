@@ -176,8 +176,10 @@ def main() -> None:
                f'<!doctype html>\n<html lang="fr"><head>{tete}</style></head>'
                f"<body{classe}>{reste}</body></html>")
 
+    # L'aperçu montre ce qui part à l'impression : la version en gros caractères.
     apercu = complete.replace("__PAGE__", "A4").replace("__MARQUES__", "")
-    ecrire(DIST / "apercu-artifact.html", apercu)
+    ecrire(DIST / "apercu-artifact.html",
+           apercu + '\n<script>document.body.classList.add("gros")</script>\n')
 
 
 if __name__ == "__main__":

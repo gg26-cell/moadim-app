@@ -21,7 +21,8 @@ Logo Moadim en couleur, QR vers la fiche App Store.
 | `build.py` | injecte polices, logo et QR ; écrit les HTML de `dist/` |
 | `topdf.mjs` | rend les HTML en PDF, chacun à son format de page |
 | `quadri.py` | passe le PDF quadri en CMJN et pose TrimBox / BleedBox |
-| `dist/…-pliage-quadri-BAT.pdf` | **le bon à tirer** — feuille A3 imposée, CMJN, fond perdu, traits de coupe et de pliage |
+| `dist/…-veoprint-A3-gros-quadri-BAT.pdf` | **le fichier envoyé à l'imprimeur** — A3 imposé, gros caractères, CMJN, fond perdu 2 mm, sans repères |
+| `dist/…-pliage-quadri-BAT.pdf` | même feuille à la norme classique — fond perdu 3 mm, traits de coupe et de pliage |
 | `dist/…-pliage-A3.pdf` | la même feuille imposée, sans repères — tirage A3 de bureau |
 | `dist/…-complete-A4.pdf` | les 4 pages séparées, une par page A4 — dépannage à la maison |
 | `dist/…-courte-A4.pdf` | la version 2 pages sans le Kiddouch |
@@ -53,13 +54,26 @@ python3 print/quadri.py
 - **Imposition** : déjà faite dans le fichier de pliage. Impression **recto-verso,
   retournement bord long**, puis un pli au centre. Ne pas laisser l'imprimeur imposer
   une seconde fois.
-- **Papier conseillé** : 150 g mat ivoire pour une feuille, 250 g pour une carte de
-  table qui tient debout.
+- **Commandé** : 350 g/m² couché mat, pelliculage mat deux faces, rainage
+  impératif avant pliage et pli parallèle au sens des fibres — à ce grammage, un
+  pli non rainé fend la couche. Rien ne traverse la ligne de pli : 26 mm de blanc
+  de part et d'autre.
 
 ## La version de bureau
 
 A4 strict, sans fond perdu ni traits de coupe, marges 11 / 13 / 8 mm : elle sort telle
 quelle sur n'importe quelle imprimante. Penser à cocher « imprimer les arrière-plans ».
+
+## Les tailles de caractères
+
+Le mode « gros » (`body.gros`) porte l'hébreu à **18 points** sur les signes et
+**16,5** sur le Kiddouch, contre 13 et 11,5 en composition normale. Pour tenir en
+quatre pages à ces tailles, il masque ce qui fait double emploi avec l'application :
+Vayekhoulou, la traduction mot à mot du Kiddouch — remplacée par son sens en quatre
+lignes —, les cent sonneries et les notes de bas de carte.
+
+Mesuré : au-delà, il n'y a plus de marge. Les quatre pages sont pleines, et chaque
+point supplémentaire se paie en contenu retiré.
 
 ## Le Kiddouch
 
