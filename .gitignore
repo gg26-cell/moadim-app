@@ -1,3 +1,3 @@
-# Copie de travail de la Haggada : elle porte une dédicace nominative et ce dépôt
-# est public. Le document vit dans son Artifact, pas ici.
-haggada/
+# La Haggada porte une dédicace nominative et ce dépôt est public :
+# le document et son PDF restent hors du suivi Git.
+/haggada/

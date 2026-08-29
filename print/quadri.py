@@ -17,6 +17,7 @@ DIST = ICI / "dist"
 
 MM = 72 / 25.4
 ROGNE, FOND_PERDU = 8, 3          # mm, cf. build.py
+ROGNE_VEO = 2                     # norme Veoprint : 2 mm de fond perdu, pas de traits
 
 
 def boite(page: pikepdf.Page, marge: float) -> list[float]:
@@ -31,6 +32,10 @@ def boite(page: pikepdf.Page, marge: float) -> list[float]:
 
 
 def convertir(source: pathlib.Path) -> None:
+    # Chez l'imprimeur en ligne, le fond perdu vaut 2 mm et le fichier n'a pas
+    # de zone de repères : la boîte de rognage tombe donc à 2 mm du bord.
+    rogne = ROGNE_VEO if "veoprint" in source.name else ROGNE
+    fond_perdu = ROGNE_VEO if "veoprint" in source.name else FOND_PERDU
     cible = source.with_name(source.stem + "-BAT.pdf")
     intermediaire = cible.with_suffix(".tmp.pdf")
     subprocess.run(
@@ -45,8 +50,8 @@ def convertir(source: pathlib.Path) -> None:
     )
     with pikepdf.open(intermediaire) as pdf:
         for page in pdf.pages:
-            page.TrimBox = boite(page, ROGNE)
-            page.BleedBox = boite(page, ROGNE - FOND_PERDU)
+            page.TrimBox = boite(page, rogne)
+            page.BleedBox = boite(page, rogne - fond_perdu)
         pdf.save(cible, linearize=True)
     intermediaire.unlink()
     source.unlink()

@@ -51,6 +51,16 @@
   body.pliage .pli { width: 420mm; height: 297mm; }
   body.pliage.quadri .pli { width: 436mm; height: 313mm; padding: 8mm; }
   body.pliage.quadri .fond-pli { inset: 5mm; }
+  /* Norme Veoprint : fichier = format fini + 4 mm (2 mm de fond perdu par bord),
+     aucun trait de coupe, l'aplat déborde jusqu'au bord du fichier. */
+  body.veo .feuille { width: 214mm; height: 301mm; padding: 13mm 15mm 10mm; }
+  body.veo .fond { inset: 0; }
+  body.veo .bat-marque { display: none; }
+  body.veo.pliage .pli { width: 424mm; height: 301mm; padding: 2mm; }
+  body.veo.pliage .fond-pli { inset: 0; }
+  body.veo.pliage .feuille { width: 210mm; height: 297mm; padding: 11mm 13mm 8mm; }
+  body.veo .slug-pli { display: none; }
+
   .slug-pli {
     display: none; position: absolute; left: 8mm; right: 8mm; bottom: 2.5mm;
     font-size: 6.6pt; letter-spacing: 0.4px; color: var(--filet);

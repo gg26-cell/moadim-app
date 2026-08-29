@@ -143,6 +143,9 @@ def main() -> None:
         ("pliage-A3", complete, "420mm 297mm", "", ' class="pliage"', True),
         ("pliage-quadri", complete, f"{PLI_L}mm {PLI_H}mm",
          traits_de_coupe(PLI_L, PLI_H, pliage=True), ' class="bat pliage quadri"', True),
+        # Fichiers à la norme de l'imprimeur en ligne : + 4 mm, sans repères.
+        ("veoprint-A4-quadri", sans_kiddouch(commun), "214mm 301mm", "", ' class="veo"', False),
+        ("veoprint-A3-quadri", complete, "424mm 301mm", "", ' class="veo pliage"', True),
     ]
     for nom, gabarit, page, marques, classe, imposition in sorties:
         corps = gabarit.replace("__PAGE__", page)
